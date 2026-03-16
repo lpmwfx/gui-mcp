@@ -59,25 +59,27 @@ impl SlintGuiServer_ui {
         }
     }
 
-    /// Type text into the currently focused element.
-    #[tool(description = "Type text into the currently focused element")]
+    /// Type text into a window. Focuses the window first, then types.
+    #[tool(description = "Focus a window by title, then type text into it")]
     async fn type_text(
         &self,
+        #[tool(param)] window_title: String,
         #[tool(param)] text: String,
     ) -> Result<CallToolResult, McpError> {
-        match app_adp::type_text(&text) {
+        match app_adp::focused_type_text(&window_title, &text) {
             Ok(()) => Ok(CallToolResult::success(vec![Content::text("ok")])),
             Err(e) => Ok(CallToolResult::error(vec![Content::text(e.to_string())])),
         }
     }
 
-    /// Send a key combination such as ctrl+s, enter, or tab.
-    #[tool(description = "Send a key combination such as ctrl+s, enter, or tab")]
+    /// Send a key combination to a window. Focuses the window first, then sends keys.
+    #[tool(description = "Focus a window by title, then send a key combination (e.g. ctrl+s, enter, tab)")]
     async fn send_keys(
         &self,
+        #[tool(param)] window_title: String,
         #[tool(param)] keys: String,
     ) -> Result<CallToolResult, McpError> {
-        match app_adp::send_keys(&keys) {
+        match app_adp::focused_send_keys(&window_title, &keys) {
             Ok(()) => Ok(CallToolResult::success(vec![Content::text("ok")])),
             Err(e) => Ok(CallToolResult::error(vec![Content::text(e.to_string())])),
         }

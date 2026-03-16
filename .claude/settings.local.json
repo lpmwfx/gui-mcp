@@ -4,7 +4,30 @@
       "mcp__rules__get_rule",
       "mcp__rulestools__setup",
       "Bash(cd:*)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(cargo build:*)",
+      "mcp__rules__search_rules",
+      "mcp__rulestools__scan_file",
+      "Bash(cargo test:*)",
+      "Read(//c/Users/mathi/AppData/Roaming/Claude//**)",
+      "Read(//c/Users/mathi/AppData/Roaming/Claude/**)",
+      "Bash(mkdir -p /c/Users/mathi/bin)",
+      "Bash(cp D:/REPO/MCP/gui-mcp/target/release/slint-gui-mcp.exe /c/Users/mathi/bin/gui-mcp.exe)",
+      "Read(//c/Users/mathi/bin/**)",
+      "Bash(ldd:*)",
+      "Bash(echo:*)",
+      "Bash(timeout 3 /c/Users/mathi/bin/gui-mcp.exe)",
+      "Bash(claude mcp:*)",
+      "Bash(cat:*)",
+      "Bash(printf:*)",
+      "Bash(python3:*)",
+      "mcp__gui-mcp__list_windows",
+      "mcp__gui-mcp__get_window_info",
+      "mcp__gui-mcp__screenshot_window",
+      "mcp__gui-mcp__send_keys",
+      "mcp__gui-mcp__type_text",
+      "Bash(start:*)",
+      "Bash(cp:*)"
     ]
   }
 }
