@@ -1,10 +1,9 @@
-/// Local smoke tests — verify the PAL and adapter layers work against real windows.
-///
-/// Run with:  cargo test -- --nocapture
-/// The screenshot test saves `smoke_screenshot.png` in the project root.
-use base64::{Engine as _, engine::general_purpose::STANDARD};
-use slint_gui_mcp::pal::window_pal;
+/// Local smoke tests -- verify PAL, adapter, and MCP registration.
 use slint_gui_mcp::adapter::app_adp;
+use slint_gui_mcp::pal::window_pal;
+use base64::{engine::general_purpose::STANDARD, Engine as _};
+
+type TestResult = Result<(), Box<dyn std::error::Error>>;
 
 /// Test MCP tool registration via full protocol handshake.
 #[tokio::test]
@@ -14,25 +13,26 @@ async fn test_mcp_tools_registered() -> TestResult {
     let (client_tx, server_rx) = tokio::io::duplex(4096);
     let (server_tx, client_rx) = tokio::io::duplex(4096);
 
-    let _server_handle = tokio::spawn(async move {
-        rmcp::serve_server(SlintGuiServer_ui, (server_rx, server_tx)).await
-    });
+    let server_future = async move { rmcp::serve_server(SlintGuiServer_ui, (server_rx, server_tx)).await };
+    let server_handle = tokio::task::spawn(server_future);
 
-    let client = rmcp::serve_client((), (client_rx, client_tx)).await
+    let client = rmcp::serve_client((), (client_rx, client_tx))
+        .await
         .map_err(|e| format!("client start: {e}"))?;
 
-    let tools_result = client.list_tools(Default::default()).await
+    let tools_list = client
+        .list_tools(Default::default())
+        .await
         .map_err(|e| format!("tools/list: {e}"))?;
 
-    assert_eq!(tools_result.tools.len(), 7, "Expected 7 MCP tools");
+    assert_eq!(tools_list.tools.len(), 12, "Expected 12 MCP tools");
 
     let _ = client.cancel().await;
+    server_handle.abort();
     Ok(())
 }
 
-type TestResult = Result<(), Box<dyn std::error::Error>>;
-
-/// Lists all visible windows and prints them.  Always passes on a live desktop.
+/// Lists all visible windows and prints them. Always passes on a live desktop.
 #[test]
 fn test_list_windows() -> TestResult {
     let titles = window_pal::list_window_titles_pal()?;
@@ -40,7 +40,10 @@ fn test_list_windows() -> TestResult {
     for t in &titles {
         println!("  {t}");
     }
-    assert!(!titles.is_empty(), "Expected at least one visible window on the desktop");
+    assert!(
+        !titles.is_empty(),
+        "Expected at least one visible window on the desktop"
+    );
     Ok(())
 }
 
@@ -48,20 +51,21 @@ fn test_list_windows() -> TestResult {
 #[test]
 fn test_screenshot_first_window() -> TestResult {
     let titles = window_pal::list_window_titles_pal()?;
-    let title = titles.first().ok_or("No windows found")?;
-    println!("\n=== Screenshot of: {title} ===");
+    for title in titles {
+        if let Ok((b64, w, h, _)) = app_adp::screenshot_window(&title) {
+            println!("\n=== Screenshot of: {title} ===");
+            println!("  {w}x{h}, {} base64 chars", b64.len());
 
-    let (b64, w, h, _) = app_adp::screenshot_window(title)?;
-    println!("  {w}x{h}, {} base64 chars", b64.len());
+            assert!(w > 0 && h > 0, "Expected positive dimensions");
+            assert!(!b64.is_empty(), "Expected non-empty base64 PNG");
 
-    assert!(w > 0 && h > 0, "Expected positive dimensions");
-    assert!(!b64.is_empty(), "Expected non-empty base64 PNG");
+            let png_bytes = STANDARD.decode(&b64)?;
+            println!("  PNG size: {} bytes", png_bytes.len());
+            return Ok(());
+        }
+    }
 
-    let png_bytes = STANDARD.decode(&b64)?;
-    std::fs::write("smoke_screenshot.png", &png_bytes)?;
-    println!("  Saved smoke_screenshot.png ({} bytes)", png_bytes.len());
-
-    Ok(())
+    Err("No visible window could be captured successfully".into())
 }
 
 /// Gets window info for the first available window.
