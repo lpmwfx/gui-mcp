@@ -1,0 +1,153 @@
+# gui-mcp
+
+A Windows MCP server that gives AI assistants vision and control of desktop GUI windows.
+
+Built in Rust as a single binary with zero runtime dependencies. Works with Claude Code, Codex, and any MCP-compatible client.
+
+## What it does
+
+AI assistants can't see your screen. gui-mcp fixes that by exposing 14 tools over the [Model Context Protocol](https://modelcontextprotocol.io/) that let an AI:
+
+- **See** windows via screenshots and rapid burst capture
+- **Find** UI elements via image template matching (NCC)
+- **Click** elements by template or by coordinates
+- **Type** text and send keyboard shortcuts
+- **Read/write** clipboard content
+- **Crop** screen regions to build reusable template libraries
+
+All operations work on **background windows** -- no foreground stealing, no focus switching.
+
+## Tools
+
+| Tool | Description |
+|------|-------------|
+| `list_windows` | List all visible windows with titles |
+| `get_window_info` | Get title, rect, and dimensions for a window |
+| `screenshot_window` | Capture a window as base64 PNG |
+| `screenshot_burst` | Rapid multi-frame capture (up to 10 frames) |
+| `find_element` | Find a UI element via image template matching |
+| `click_element` | Find and click a UI element via template matching |
+| `click_at` | Click at pixel coordinates (no template needed) |
+| `crop_region` | Crop a region from a window screenshot as base64 PNG |
+| `type_text` | Type text into a window |
+| `send_keys` | Send key combinations (e.g. `ctrl+s`, `enter`) |
+| `select_all` | Select all text in an edit control |
+| `copy` | Copy selection to clipboard |
+| `cut` | Cut selection to clipboard |
+| `paste` | Paste clipboard into an edit control |
+
+## Install
+
+### Build from source
+
+```
+git clone https://github.com/lpmwfx/gui-mcp.git
+cd gui-mcp
+cargo build --release
+cp target/release/slint-gui-mcp.exe ~/bin/gui-mcp.exe
+```
+
+### Configure Claude Code
+
+Add to `~/.claude/settings.json`:
+
+```json
+{
+  "mcpServers": {
+    "gui-mcp": {
+      "command": "C:/Users/YOU/bin/gui-mcp.exe",
+      "args": [],
+      "type": "stdio"
+    }
+  }
+}
+```
+
+### Configure Codex
+
+Add to your Codex MCP config:
+
+```json
+{
+  "gui-mcp": {
+    "command": "C:/Users/YOU/bin/gui-mcp.exe",
+    "args": []
+  }
+}
+```
+
+## Usage examples
+
+### Screenshot a window
+
+```
+screenshot_window(window_title: "Notepad")
+```
+
+Returns a base64 PNG of the window contents.
+
+### Find and click a button
+
+```
+// First, crop a button from a screenshot to use as template
+crop_region(window_title: "My App", x: 100, y: 200, width: 80, height: 30)
+
+// Then use that template to find and click the button
+click_element(window_title: "My App", template_base64: "<cropped png>")
+```
+
+### Click at known coordinates
+
+```
+click_at(window_title: "My App", x: 150, y: 215)
+```
+
+### Type and send keys
+
+```
+type_text(window_title: "Notepad", text: "Hello, world!")
+send_keys(window_title: "Notepad", keys: "ctrl+s")
+```
+
+### Build a template library
+
+The crop-then-find workflow lets AI assistants build reusable UI element datasets:
+
+1. `screenshot_window` -- capture the full window
+2. `crop_region` -- extract buttons, icons, labels as templates
+3. `find_element` -- locate those templates in future screenshots
+4. `click_element` -- click matched elements
+
+This enables robust GUI automation that adapts to layout changes.
+
+## Architecture
+
+Six-layer hexagonal topology with strict one-way imports:
+
+```
+src/
+  ui/          -- MCP server (tool definitions, rmcp)
+  adapter/     -- orchestration (coordinates core + pal)
+  core/        -- pure logic (NCC matching, image cropping)
+  pal/         -- platform (Win32 HWND, GDI capture, PostMessage)
+  shared/      -- cross-cutting (error types)
+  state/       -- constants (thresholds, timings, message IDs)
+```
+
+## Requirements
+
+- Windows 10/11
+- Rust stable (edition 2021)
+- A live desktop session (not headless)
+
+## Known limitations
+
+- `PrintWindow` can fail for GPU-accelerated, minimized, or non-standard windows
+- Partial title matching can hit the wrong window if titles overlap
+- Coordinates may drift on high-DPI or mixed-scaling setups
+- PostMessage input doesn't work with all custom controls or elevated windows
+- NCC template matching is CPU-bound; large screenshots with small templates can be slow
+
+## License
+
+MIT
