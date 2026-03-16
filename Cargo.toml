@@ -24,6 +24,8 @@ windows = { version = "0.58", features = [
 [dev-dependencies]
 base64 = "0.22"
 image  = "0.25"
+rmcp   = { version = "0.1", features = ["client", "transport-io"] }
+tokio  = { version = "1", features = ["full"] }
 
 [build-dependencies]
 rustdocumenter = { git = "https://github.com/lpmwfx/RustDocumenter" }

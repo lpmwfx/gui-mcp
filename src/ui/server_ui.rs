@@ -105,6 +105,7 @@ impl SlintGuiServer_ui {
     }
 }
 
+#[tool(tool_box)]
 impl ServerHandler for SlintGuiServer_ui {
     fn get_info(&self) -> ServerInfo {
         ServerInfo {

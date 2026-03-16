@@ -8,3 +8,5 @@ pub mod pal;
 pub mod shared;
 /// Manages application state, configuration, and lifecycle.
 pub mod state;
+/// MCP server UI layer.
+pub mod ui;

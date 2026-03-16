@@ -6,6 +6,30 @@ use base64::{Engine as _, engine::general_purpose::STANDARD};
 use slint_gui_mcp::pal::window_pal;
 use slint_gui_mcp::adapter::app_adp;
 
+/// Test MCP tool registration via full protocol handshake.
+#[tokio::test]
+async fn test_mcp_tools_registered() -> TestResult {
+    use slint_gui_mcp::ui::server_ui::SlintGuiServer_ui;
+
+    let (client_tx, server_rx) = tokio::io::duplex(4096);
+    let (server_tx, client_rx) = tokio::io::duplex(4096);
+
+    let _server_handle = tokio::spawn(async move {
+        rmcp::serve_server(SlintGuiServer_ui, (server_rx, server_tx)).await
+    });
+
+    let client = rmcp::serve_client((), (client_rx, client_tx)).await
+        .map_err(|e| format!("client start: {e}"))?;
+
+    let tools_result = client.list_tools(Default::default()).await
+        .map_err(|e| format!("tools/list: {e}"))?;
+
+    assert_eq!(tools_result.tools.len(), 7, "Expected 7 MCP tools");
+
+    let _ = client.cancel().await;
+    Ok(())
+}
+
 type TestResult = Result<(), Box<dyn std::error::Error>>;
 
 /// Lists all visible windows and prints them.  Always passes on a live desktop.
