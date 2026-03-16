@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__rules__get_rule",
+      "mcp__rulestools__setup",
+      "Bash(cd:*)",
+      "Bash(find:*)"
+    ]
+  }
+}

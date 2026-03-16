@@ -1,0 +1,44 @@
+# PROJECT: slint-gui-mcp
+
+## Goal
+A Windows-only MCP server written in Rust that gives AI assistants (e.g. Claude Code) vision
+and control of a running GUI window. Solves the problem of AIs guessing UI positions by
+providing direct visual feedback and image-based interaction via template matching —
+no coordinates needed, AI sends a crop of the UI element and the server finds and clicks it.
+
+## Stack
+- Language: Rust (stable, edition 2021)
+- MCP protocol: rmcp 0.1 (community crate, server + transport-io features)
+- Window capture: windows crate 0.58 (Win32 HWND-based)
+- Image processing: image 0.25, imageproc 0.25 (template matching via NCC)
+- Input: enigo 0.2 (mouse + keyboard, cross-platform)
+- Serialisation: serde 1, serde_json 1, base64 0.22
+- Async runtime: tokio 1 (full features — required by rmcp)
+- Build scanners: rustdocumenter, rustscanners (git deps)
+
+## Structure
+- src:    src/
+- state:  src/state/
+- proj:   proj/
+- docs:   doc/
+
+## Method
+- Workflow: PROJECT → FIXES → TODO → code → cargo build → test → DONE
+- Branching: feature branches, never commit to main
+- Testing: cargo test
+- Deploy: single binary, no runtime dependencies
+
+## Patterns
+- window-find: EnumWindows with partial case-insensitive title match → HWND
+- image-capture: GetWindowDC + CreateCompatibleBitmap + BitBlt → BGRA → RgbImage
+- template-match: Normalized cross-correlation (NCC) over RgbImage pairs
+- mcp-tool: #[tool(tool_box)] impl on server struct, one async fn per MCP tool
+- constants: All literal values (thresholds, timeouts) in src/state/ — never inline
+
+## Current
+- phase: 1
+- id: scaffold
+- status: development
+
+## History
+(none yet)

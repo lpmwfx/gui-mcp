@@ -1,0 +1,5 @@
+[scan]
+languages = ["rust"]
+
+[project]
+deny = false

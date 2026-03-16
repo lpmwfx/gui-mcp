@@ -1,0 +1,31 @@
+# RULES: slint-gui-mcp
+
+## Active Rules
+
+### Always
+- global/topology.md
+- global/module-tree.md
+- global/file-limits.md
+- global/config-driven.md
+- global/persistent-state.md
+
+### Language: Rust
+- rust/README.md
+- rust/ownership.md
+- rust/errors.md
+- rust/naming.md
+- rust/constants.md
+- rust/modules.md
+
+## Project Rules
+- All Win32 unsafe calls are isolated in `src/window.rs` — no unsafe in other modules
+- Template matching lives exclusively in `src/vision.rs`
+- Mouse/keyboard actions live exclusively in `src/actions.rs`
+- MCP tool dispatch and server setup live exclusively in `src/main.rs`
+- All numeric constants (confidence thresholds, timeouts, buffer sizes) live in `src/state/`
+- Windows-platform dependencies are declared under `[target.'cfg(windows)'.dependencies]`
+- enigo and rmcp are used only in `src/actions.rs` and `src/main.rs` respectively
+- `SetForegroundWindow` must be called before every capture or click action
+
+## Derived from FIXES
+(none yet)
