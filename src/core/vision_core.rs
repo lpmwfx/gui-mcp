@@ -99,3 +99,63 @@ fn ncc_at(
 fn variance(pixels: &[f32], mean: f32) -> f32 {
     pixels.iter().map(|&v| (v - mean).powi(CENTER_DIVISOR as i32)).sum::<f32>() / pixels.len() as f32
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use image::{imageops, Rgb, RgbImage};
+
+    fn patterned_image(width: u32, height: u32) -> RgbImage {
+        let mut img = RgbImage::new(width, height);
+        for y in 0..height {
+            for x in 0..width {
+                img.put_pixel(
+                    x,
+                    y,
+                    Rgb([
+                        ((x * 17 + y * 3) % 251) as u8,
+                        ((x * 7 + y * 19 + 11) % 241) as u8,
+                        ((x * 13 + y * 5 + 23) % 239) as u8,
+                    ]),
+                );
+            }
+        }
+        img
+    }
+
+    #[test]
+    fn finds_exact_template_center() {
+        let screenshot = patterned_image(20, 16);
+        let template = imageops::crop_imm(&screenshot, 6, 7, 4, 3).to_image();
+
+        let found = find_template(&screenshot, &template, Some(0.999)).expect("expected match");
+
+        assert_eq!(found.x, 8);
+        assert_eq!(found.y, 8);
+        assert!(found.confidence >= 0.999);
+    }
+
+    #[test]
+    fn rejects_threshold_above_perfect_match() {
+        let screenshot = patterned_image(18, 12);
+        let template = imageops::crop_imm(&screenshot, 5, 4, 3, 3).to_image();
+
+        assert!(find_template(&screenshot, &template, Some(1.01)).is_none());
+    }
+
+    #[test]
+    fn rejects_template_larger_than_screenshot() {
+        let screenshot = patterned_image(4, 4);
+        let template = patterned_image(5, 5);
+
+        assert!(find_template(&screenshot, &template, Some(0.8)).is_none());
+    }
+
+    #[test]
+    fn rejects_uniform_template_regions() {
+        let screenshot = RgbImage::from_pixel(8, 8, Rgb([255, 255, 255]));
+        let template = RgbImage::from_pixel(2, 2, Rgb([255, 255, 255]));
+
+        assert!(find_template(&screenshot, &template, Some(0.1)).is_none());
+    }
+}
