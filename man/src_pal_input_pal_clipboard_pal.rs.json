@@ -1,0 +1,33 @@
+{
+  "source": "src/pal/input_pal/clipboard_pal.rs",
+  "items": [
+    {
+      "name": "select_all_pal",
+      "kind": "Fn",
+      "signature": "pub fn select_all_pal(hwnd: u64) -> Result<(), AppError>",
+      "line": 12,
+      "doc": "Selects all text in the edit control of `hwnd`."
+    },
+    {
+      "name": "copy_pal",
+      "kind": "Fn",
+      "signature": "pub fn copy_pal(hwnd: u64) -> Result<(), AppError>",
+      "line": 31,
+      "doc": "Copies the current selection to the clipboard."
+    },
+    {
+      "name": "cut_pal",
+      "kind": "Fn",
+      "signature": "pub fn cut_pal(hwnd: u64) -> Result<(), AppError>",
+      "line": 50,
+      "doc": "Cuts the current selection to the clipboard."
+    },
+    {
+      "name": "paste_pal",
+      "kind": "Fn",
+      "signature": "pub fn paste_pal(hwnd: u64) -> Result<(), AppError>",
+      "line": 69,
+      "doc": "Pastes clipboard content into the edit control."
+    }
+  ]
+}

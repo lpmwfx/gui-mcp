@@ -1,0 +1,12 @@
+{
+  "source": "src/shared/errors_x.rs",
+  "items": [
+    {
+      "name": "AppError_x",
+      "kind": "Enum",
+      "signature": "pub enum AppError_x",
+      "line": 4,
+      "doc": "Shared error type for all MCP tool operations."
+    }
+  ]
+}

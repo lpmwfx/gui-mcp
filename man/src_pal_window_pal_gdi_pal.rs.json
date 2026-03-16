@@ -1,0 +1,12 @@
+{
+  "source": "src/pal/window_pal/gdi_pal.rs",
+  "items": [
+    {
+      "name": "gdi_capture_raw_pal",
+      "kind": "Fn",
+      "signature": "pub(crate) fn gdi_capture_raw_pal(hwnd: u64) -> Result<(Vec<u8>, i32, i32), AppError>",
+      "line": 20,
+      "doc": "Captures raw BGRA pixels from `hwnd` using PrintWindow.\nWorks even when the window is behind other windows or on another virtual desktop."
+    }
+  ]
+}

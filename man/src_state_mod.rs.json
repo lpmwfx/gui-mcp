@@ -1,0 +1,19 @@
+{
+  "source": "src/state/mod.rs",
+  "items": [
+    {
+      "name": "limits",
+      "kind": "Mod",
+      "signature": "pub mod limits;",
+      "line": 2,
+      "doc": "Provides types and utilities for enforcing rate limits, throttling, and resource constraints throughout the application."
+    },
+    {
+      "name": "sizes",
+      "kind": "Mod",
+      "signature": "pub mod sizes;",
+      "line": 4,
+      "doc": "Types and utilities for representing and managing sizes."
+    }
+  ]
+}

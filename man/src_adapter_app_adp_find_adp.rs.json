@@ -1,0 +1,12 @@
+{
+  "source": "src/adapter/app_adp/find_adp.rs",
+  "items": [
+    {
+      "name": "find_element",
+      "kind": "Fn",
+      "signature": "pub fn find_element( window_title: &str, template_base64: &str, confidence: Option<f32>, ) -> Result<Option<(u32, u32, u32, u32, f32)>, AppError>",
+      "line": 7,
+      "doc": "Finds a template in a window screenshot and returns the match result."
+    }
+  ]
+}

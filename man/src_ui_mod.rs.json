@@ -1,0 +1,12 @@
+{
+  "source": "src/ui/mod.rs",
+  "items": [
+    {
+      "name": "server_ui",
+      "kind": "Mod",
+      "signature": "pub mod server_ui;",
+      "line": 2,
+      "doc": "UI layer  --  MCP server (AI interface surface)."
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "source": "src/lib.rs",
+  "items": [
+    {
+      "name": "adapter",
+      "kind": "Mod",
+      "signature": "pub mod adapter;",
+      "line": 2,
+      "doc": "Library crate  --  exposes all layers for integration tests and tooling."
+    },
+    {
+      "name": "core",
+      "kind": "Mod",
+      "signature": "pub mod core;",
+      "line": 4,
+      "doc": "Core types and functionality for this crate."
+    },
+    {
+      "name": "pal",
+      "kind": "Mod",
+      "signature": "pub mod pal;",
+      "line": 6,
+      "doc": "Utilities and functionality for the PAL subsystem."
+    },
+    {
+      "name": "shared",
+      "kind": "Mod",
+      "signature": "pub mod shared;",
+      "line": 8,
+      "doc": "Shared types, utilities, and functionality used across the crate."
+    },
+    {
+      "name": "state",
+      "kind": "Mod",
+      "signature": "pub mod state;",
+      "line": 10,
+      "doc": "Manages application state, configuration, and lifecycle."
+    },
+    {
+      "name": "ui",
+      "kind": "Mod",
+      "signature": "pub mod ui;",
+      "line": 12,
+      "doc": "MCP server UI layer."
+    }
+  ]
+}

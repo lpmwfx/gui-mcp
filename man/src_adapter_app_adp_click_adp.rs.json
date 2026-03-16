@@ -1,0 +1,12 @@
+{
+  "source": "src/adapter/app_adp/click_adp.rs",
+  "items": [
+    {
+      "name": "click_element",
+      "kind": "Fn",
+      "signature": "pub fn click_element( window_title: &str, template_base64: &str, confidence: Option<f32>, button: Option<&str>, ) -> Result<(i32, i32, f32, String), AppError>",
+      "line": 10,
+      "doc": "Finds a template and clicks it; returns click coords, confidence, and after-screenshot."
+    }
+  ]
+}

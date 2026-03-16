@@ -1,0 +1,12 @@
+{
+  "source": "src/pal/window_pal/capture_pal.rs",
+  "items": [
+    {
+      "name": "capture_window",
+      "kind": "Fn",
+      "signature": "pub fn capture_window(hwnd: u64) -> Result<RgbImage, AppError>",
+      "line": 18,
+      "doc": "Captures the window bitmap for `hwnd` and returns it as an RgbImage."
+    }
+  ]
+}

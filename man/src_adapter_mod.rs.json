@@ -1,0 +1,12 @@
+{
+  "source": "src/adapter/mod.rs",
+  "items": [
+    {
+      "name": "app_adp",
+      "kind": "Mod",
+      "signature": "pub mod app_adp;",
+      "line": 2,
+      "doc": "Adapter layer  --  data exchange hub that routes MCP requests to core/pal."
+    }
+  ]
+}

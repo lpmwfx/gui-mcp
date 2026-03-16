@@ -1,0 +1,26 @@
+{
+  "source": "src/pal/input_pal/mod.rs",
+  "items": [
+    {
+      "name": "vk_pal",
+      "kind": "Mod",
+      "signature": "pub(crate) mod vk_pal;",
+      "line": 7,
+      "doc": "Virtual-key code mapping and combo posting."
+    },
+    {
+      "name": "type_text",
+      "kind": "Fn",
+      "signature": "pub fn type_text(hwnd: u64, text: &str) -> Result<(), AppError>",
+      "line": 23,
+      "doc": "Types text into `hwnd` via WM_CHAR messages. No foreground required.\nConverts `\\n` to `\\r` for RichEdit compatibility."
+    },
+    {
+      "name": "send_keys",
+      "kind": "Fn",
+      "signature": "pub fn send_keys(hwnd: u64, keys: &str) -> Result<(), AppError>",
+      "line": 45,
+      "doc": "Sends a key combination to `hwnd` via WM_KEYDOWN/WM_KEYUP. No foreground required."
+    }
+  ]
+}

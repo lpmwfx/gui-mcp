@@ -1,0 +1,327 @@
+{
+  "source": "src/state/sizes.rs",
+  "items": [
+    {
+      "name": "CAPTURE_BPP",
+      "kind": "Const",
+      "signature": "pub const CAPTURE_BPP: i32 = 32;",
+      "line": 2,
+      "doc": "Bits per pixel used when capturing window bitmaps (BGRA = 32 bpp)."
+    },
+    {
+      "name": "CAPTURE_BYTES_PER_PIXEL",
+      "kind": "Const",
+      "signature": "pub const CAPTURE_BYTES_PER_PIXEL: usize = 4;",
+      "line": 5,
+      "doc": "Bytes per pixel for BGRA capture buffers."
+    },
+    {
+      "name": "RGB_CHANNELS",
+      "kind": "Const",
+      "signature": "pub const RGB_CHANNELS: u32 = 3;",
+      "line": 8,
+      "doc": "Number of colour channels in an RGB image (R, G, B)."
+    },
+    {
+      "name": "CENTER_DIVISOR",
+      "kind": "Const",
+      "signature": "pub const CENTER_DIVISOR: u32 = 2;",
+      "line": 11,
+      "doc": "Divisor used to compute the centre offset of a template region."
+    },
+    {
+      "name": "WINDOW_TITLE_BUF",
+      "kind": "Const",
+      "signature": "pub const WINDOW_TITLE_BUF: usize = 512;",
+      "line": 14,
+      "doc": "Maximum number of UTF-16 code units for a window title buffer."
+    },
+    {
+      "name": "TITLE_BUF_PADDING",
+      "kind": "Const",
+      "signature": "pub const TITLE_BUF_PADDING: usize = 2;",
+      "line": 17,
+      "doc": "Extra UTF-16 code units added to GetWindowTextLengthW result (null terminator + guard byte)."
+    },
+    {
+      "name": "BGRA_R_IDX",
+      "kind": "Const",
+      "signature": "pub const BGRA_R_IDX: usize = 2;",
+      "line": 20,
+      "doc": "Byte index of the Red channel within a BGRA pixel (index 2)."
+    },
+    {
+      "name": "BGRA_G_IDX",
+      "kind": "Const",
+      "signature": "pub const BGRA_G_IDX: usize = 1;",
+      "line": 23,
+      "doc": "Byte index of the Green channel within a BGRA pixel (index 1)."
+    },
+    {
+      "name": "BGRA_B_IDX",
+      "kind": "Const",
+      "signature": "pub const BGRA_B_IDX: usize = 0;",
+      "line": 26,
+      "doc": "Byte index of the Blue channel within a BGRA pixel (index 0)."
+    },
+    {
+      "name": "FOCUS_DELAY_MS",
+      "kind": "Const",
+      "signature": "pub const FOCUS_DELAY_MS: u64 = 100;",
+      "line": 29,
+      "doc": "Milliseconds to wait after SetForegroundWindow before sending input."
+    },
+    {
+      "name": "PW_FULL_CONTENT",
+      "kind": "Const",
+      "signature": "pub const PW_FULL_CONTENT: u32 = 2;",
+      "line": 32,
+      "doc": "PrintWindow flag: PW_RENDERFULLCONTENT  --  captures background/hidden windows."
+    },
+    {
+      "name": "KEY_EVENT_DELAY_MS",
+      "kind": "Const",
+      "signature": "pub const KEY_EVENT_DELAY_MS: u64 = 10;",
+      "line": 35,
+      "doc": "Milliseconds to sleep between key-down and key-up messages."
+    },
+    {
+      "name": "WM_CHAR_ID",
+      "kind": "Const",
+      "signature": "pub const WM_CHAR_ID: u32 = 0x0102;",
+      "line": 38,
+      "doc": "WM_CHAR message ID."
+    },
+    {
+      "name": "WM_KEYDOWN_ID",
+      "kind": "Const",
+      "signature": "pub const WM_KEYDOWN_ID: u32 = 0x0100;",
+      "line": 41,
+      "doc": "WM_KEYDOWN message ID."
+    },
+    {
+      "name": "WM_KEYUP_ID",
+      "kind": "Const",
+      "signature": "pub const WM_KEYUP_ID: u32 = 0x0101;",
+      "line": 44,
+      "doc": "WM_KEYUP message ID."
+    },
+    {
+      "name": "WM_LBUTTONDOWN_ID",
+      "kind": "Const",
+      "signature": "pub const WM_LBUTTONDOWN_ID: u32 = 0x0201;",
+      "line": 47,
+      "doc": "WM_LBUTTONDOWN message ID."
+    },
+    {
+      "name": "WM_LBUTTONUP_ID",
+      "kind": "Const",
+      "signature": "pub const WM_LBUTTONUP_ID: u32 = 0x0202;",
+      "line": 50,
+      "doc": "WM_LBUTTONUP message ID."
+    },
+    {
+      "name": "WM_RBUTTONDOWN_ID",
+      "kind": "Const",
+      "signature": "pub const WM_RBUTTONDOWN_ID: u32 = 0x0204;",
+      "line": 53,
+      "doc": "WM_RBUTTONDOWN message ID."
+    },
+    {
+      "name": "WM_RBUTTONUP_ID",
+      "kind": "Const",
+      "signature": "pub const WM_RBUTTONUP_ID: u32 = 0x0205;",
+      "line": 56,
+      "doc": "WM_RBUTTONUP message ID."
+    },
+    {
+      "name": "MOUSE_LPARAM_Y_SHIFT",
+      "kind": "Const",
+      "signature": "pub const MOUSE_LPARAM_Y_SHIFT: i32 = 16;",
+      "line": 59,
+      "doc": "Shift for y-coordinate in LPARAM for mouse messages."
+    },
+    {
+      "name": "MOUSE_COORD_MASK",
+      "kind": "Const",
+      "signature": "pub const MOUSE_COORD_MASK: i32 = 0xFFFF;",
+      "line": 62,
+      "doc": "Mask for coordinate packing in mouse LPARAM."
+    },
+    {
+      "name": "CLASS_NAME_BUF",
+      "kind": "Const",
+      "signature": "pub const CLASS_NAME_BUF: usize = 256;",
+      "line": 65,
+      "doc": "Buffer size for GetClassNameW result."
+    },
+    {
+      "name": "LPARAM_SCANCODE_SHIFT",
+      "kind": "Const",
+      "signature": "pub const LPARAM_SCANCODE_SHIFT: u32 = 16;",
+      "line": 68,
+      "doc": "Bit position of scan code in WM_KEYDOWN/UP lParam."
+    },
+    {
+      "name": "LPARAM_PREV_STATE_BIT",
+      "kind": "Const",
+      "signature": "pub const LPARAM_PREV_STATE_BIT: u32 = 30;",
+      "line": 71,
+      "doc": "Bit position of previous key state in WM_KEYDOWN/UP lParam."
+    },
+    {
+      "name": "LPARAM_TRANSITION_BIT",
+      "kind": "Const",
+      "signature": "pub const LPARAM_TRANSITION_BIT: u32 = 31;",
+      "line": 74,
+      "doc": "Bit position of transition state in WM_KEYUP lParam."
+    },
+    {
+      "name": "EM_SETSEL_ID",
+      "kind": "Const",
+      "signature": "pub const EM_SETSEL_ID: u32 = 0x00B1;",
+      "line": 77,
+      "doc": "EM_SETSEL message ID  --  selects text range in an edit control."
+    },
+    {
+      "name": "WM_COPY_ID",
+      "kind": "Const",
+      "signature": "pub const WM_COPY_ID: u32 = 0x0301;",
+      "line": 80,
+      "doc": "WM_COPY message ID  --  copies selection to clipboard."
+    },
+    {
+      "name": "WM_CUT_ID",
+      "kind": "Const",
+      "signature": "pub const WM_CUT_ID: u32 = 0x0300;",
+      "line": 83,
+      "doc": "WM_CUT message ID  --  cuts selection to clipboard."
+    },
+    {
+      "name": "WM_PASTE_ID",
+      "kind": "Const",
+      "signature": "pub const WM_PASTE_ID: u32 = 0x0302;",
+      "line": 86,
+      "doc": "WM_PASTE message ID  --  pastes clipboard into control."
+    },
+    {
+      "name": "SCREENSHOT_INTERVAL_MS",
+      "kind": "Const",
+      "signature": "pub const SCREENSHOT_INTERVAL_MS: u64 = 200;",
+      "line": 89,
+      "doc": "Milliseconds to sleep between sequential screenshots for near-live capture."
+    },
+    {
+      "name": "BURST_DEFAULT_COUNT",
+      "kind": "Const",
+      "signature": "pub const BURST_DEFAULT_COUNT: usize = 5;",
+      "line": 92,
+      "doc": "Default number of frames in a screenshot burst."
+    },
+    {
+      "name": "BURST_MAX_COUNT",
+      "kind": "Const",
+      "signature": "pub const BURST_MAX_COUNT: usize = 10;",
+      "line": 95,
+      "doc": "Maximum number of frames in a screenshot burst."
+    },
+    {
+      "name": "BURST_CONTENT_PER_FRAME",
+      "kind": "Const",
+      "signature": "pub const BURST_CONTENT_PER_FRAME: usize = 2;",
+      "line": 98,
+      "doc": "Content entries per frame in burst result (image + text label)."
+    },
+    {
+      "name": "EXPECTED_TOOL_COUNT",
+      "kind": "Const",
+      "signature": "pub const EXPECTED_TOOL_COUNT: usize = 14;",
+      "line": 101,
+      "doc": "Total number of MCP tools registered by the server."
+    },
+    {
+      "name": "CROP_FIND_MAX_DIM",
+      "kind": "Const",
+      "signature": "pub const CROP_FIND_MAX_DIM: u32 = 200;",
+      "line": 104,
+      "doc": "Maximum haystack dimension for NCC search in crop-then-find tests (debug-safe)."
+    },
+    {
+      "name": "TEST_PIXEL_R_X",
+      "kind": "Const",
+      "signature": "pub const TEST_PIXEL_R_X: u32 = 17;",
+      "line": 107,
+      "doc": "Test pixel pattern coefficients for deterministic image generation."
+    },
+    {
+      "name": "TEST_PIXEL_R_Y",
+      "kind": "Const",
+      "signature": "pub const TEST_PIXEL_R_Y: u32 = 3;",
+      "line": 109,
+      "doc": "Test pixel pattern coefficient for R channel Y component."
+    },
+    {
+      "name": "TEST_PIXEL_R_MOD",
+      "kind": "Const",
+      "signature": "pub const TEST_PIXEL_R_MOD: u32 = 251;",
+      "line": 111,
+      "doc": "Test pixel pattern modulus for R channel."
+    },
+    {
+      "name": "TEST_PIXEL_G_X",
+      "kind": "Const",
+      "signature": "pub const TEST_PIXEL_G_X: u32 = 7;",
+      "line": 113,
+      "doc": "Test pixel pattern coefficient for G channel X component."
+    },
+    {
+      "name": "TEST_PIXEL_G_Y",
+      "kind": "Const",
+      "signature": "pub const TEST_PIXEL_G_Y: u32 = 19;",
+      "line": 115,
+      "doc": "Test pixel pattern coefficient for G channel Y component."
+    },
+    {
+      "name": "TEST_PIXEL_G_OFF",
+      "kind": "Const",
+      "signature": "pub const TEST_PIXEL_G_OFF: u32 = 11;",
+      "line": 117,
+      "doc": "Test pixel pattern offset for G channel."
+    },
+    {
+      "name": "TEST_PIXEL_G_MOD",
+      "kind": "Const",
+      "signature": "pub const TEST_PIXEL_G_MOD: u32 = 241;",
+      "line": 119,
+      "doc": "Test pixel pattern modulus for G channel."
+    },
+    {
+      "name": "TEST_PIXEL_B_X",
+      "kind": "Const",
+      "signature": "pub const TEST_PIXEL_B_X: u32 = 13;",
+      "line": 121,
+      "doc": "Test pixel pattern coefficient for B channel X component."
+    },
+    {
+      "name": "TEST_PIXEL_B_Y",
+      "kind": "Const",
+      "signature": "pub const TEST_PIXEL_B_Y: u32 = 5;",
+      "line": 123,
+      "doc": "Test pixel pattern coefficient for B channel Y component."
+    },
+    {
+      "name": "TEST_PIXEL_B_OFF",
+      "kind": "Const",
+      "signature": "pub const TEST_PIXEL_B_OFF: u32 = 23;",
+      "line": 125,
+      "doc": "Test pixel pattern offset for B channel."
+    },
+    {
+      "name": "TEST_PIXEL_B_MOD",
+      "kind": "Const",
+      "signature": "pub const TEST_PIXEL_B_MOD: u32 = 239;",
+      "line": 127,
+      "doc": "Test pixel pattern modulus for B channel."
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "source": "src/adapter/app_adp/helpers_adp.rs",
+  "items": [
+    {
+      "name": "find_and_capture_adp",
+      "kind": "Fn",
+      "signature": "pub(crate) fn find_and_capture_adp(window_title: &str) -> Result<(u64, RgbImage), AppError>",
+      "line": 8,
+      "doc": "Finds a window by partial title and captures its bitmap."
+    },
+    {
+      "name": "decode_template_adp",
+      "kind": "Fn",
+      "signature": "pub(crate) fn decode_template_adp(template_base64: &str) -> Result<RgbImage, AppError>",
+      "line": 15,
+      "doc": "Decodes a base64 PNG/JPEG template into an RgbImage."
+    },
+    {
+      "name": "after_screenshot_adp",
+      "kind": "Fn",
+      "signature": "pub(crate) fn after_screenshot_adp(hwnd: u64) -> Result<String, AppError>",
+      "line": 24,
+      "doc": "Captures `hwnd` after an action and returns it as a base64 PNG string."
+    },
+    {
+      "name": "encode_png",
+      "kind": "Fn",
+      "signature": "pub(crate) fn encode_png(img: &RgbImage) -> Result<Vec<u8>, AppError>",
+      "line": 31,
+      "doc": "Encodes an RgbImage to raw PNG bytes."
+    }
+  ]
+}

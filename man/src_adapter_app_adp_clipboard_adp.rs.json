@@ -1,0 +1,33 @@
+{
+  "source": "src/adapter/app_adp/clipboard_adp.rs",
+  "items": [
+    {
+      "name": "select_all_adp",
+      "kind": "Fn",
+      "signature": "pub fn select_all_adp(window_title: &str) -> Result<(), AppError>",
+      "line": 6,
+      "doc": "Selects all text in the named window's edit control."
+    },
+    {
+      "name": "copy_adp",
+      "kind": "Fn",
+      "signature": "pub fn copy_adp(window_title: &str) -> Result<(), AppError>",
+      "line": 12,
+      "doc": "Copies the current selection in the named window."
+    },
+    {
+      "name": "cut_adp",
+      "kind": "Fn",
+      "signature": "pub fn cut_adp(window_title: &str) -> Result<(), AppError>",
+      "line": 18,
+      "doc": "Cuts the current selection in the named window."
+    },
+    {
+      "name": "paste_adp",
+      "kind": "Fn",
+      "signature": "pub fn paste_adp(window_title: &str) -> Result<(), AppError>",
+      "line": 24,
+      "doc": "Pastes clipboard content into the named window's edit control."
+    }
+  ]
+}

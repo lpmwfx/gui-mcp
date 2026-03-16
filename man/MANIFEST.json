@@ -1,0 +1,165 @@
+{
+  "project": "gui-mcp",
+  "files": [
+    {
+      "source": "src/adapter/app_adp/burst_adp.rs",
+      "item_count": 1,
+      "undocumented": 0
+    },
+    {
+      "source": "src/adapter/app_adp/click_adp.rs",
+      "item_count": 1,
+      "undocumented": 0
+    },
+    {
+      "source": "src/adapter/app_adp/clipboard_adp.rs",
+      "item_count": 4,
+      "undocumented": 0
+    },
+    {
+      "source": "src/adapter/app_adp/crop_adp.rs",
+      "item_count": 1,
+      "undocumented": 0
+    },
+    {
+      "source": "src/adapter/app_adp/find_adp.rs",
+      "item_count": 1,
+      "undocumented": 0
+    },
+    {
+      "source": "src/adapter/app_adp/focus_adp.rs",
+      "item_count": 3,
+      "undocumented": 0
+    },
+    {
+      "source": "src/adapter/app_adp/helpers_adp.rs",
+      "item_count": 4,
+      "undocumented": 0
+    },
+    {
+      "source": "src/adapter/app_adp/info_adp.rs",
+      "item_count": 2,
+      "undocumented": 0
+    },
+    {
+      "source": "src/adapter/app_adp/screenshot_adp.rs",
+      "item_count": 1,
+      "undocumented": 0
+    },
+    {
+      "source": "src/adapter/mod.rs",
+      "item_count": 1,
+      "undocumented": 0
+    },
+    {
+      "source": "src/core/crop_core.rs",
+      "item_count": 1,
+      "undocumented": 0
+    },
+    {
+      "source": "src/core/mod.rs",
+      "item_count": 2,
+      "undocumented": 0
+    },
+    {
+      "source": "src/core/vision_core.rs",
+      "item_count": 2,
+      "undocumented": 0
+    },
+    {
+      "source": "src/lib.rs",
+      "item_count": 6,
+      "undocumented": 0
+    },
+    {
+      "source": "src/pal/input_pal/child_pal.rs",
+      "item_count": 1,
+      "undocumented": 0
+    },
+    {
+      "source": "src/pal/input_pal/click_pal.rs",
+      "item_count": 1,
+      "undocumented": 0
+    },
+    {
+      "source": "src/pal/input_pal/clipboard_pal.rs",
+      "item_count": 4,
+      "undocumented": 0
+    },
+    {
+      "source": "src/pal/input_pal/mod.rs",
+      "item_count": 3,
+      "undocumented": 0
+    },
+    {
+      "source": "src/pal/input_pal/vk_pal.rs",
+      "item_count": 5,
+      "undocumented": 0
+    },
+    {
+      "source": "src/pal/mod.rs",
+      "item_count": 2,
+      "undocumented": 0
+    },
+    {
+      "source": "src/pal/window_pal/capture_pal.rs",
+      "item_count": 1,
+      "undocumented": 0
+    },
+    {
+      "source": "src/pal/window_pal/focus_pal.rs",
+      "item_count": 1,
+      "undocumented": 0
+    },
+    {
+      "source": "src/pal/window_pal/gdi_pal.rs",
+      "item_count": 1,
+      "undocumented": 0
+    },
+    {
+      "source": "src/pal/window_pal/list_pal.rs",
+      "item_count": 1,
+      "undocumented": 0
+    },
+    {
+      "source": "src/pal/window_pal/mod.rs",
+      "item_count": 3,
+      "undocumented": 0
+    },
+    {
+      "source": "src/shared/errors_x.rs",
+      "item_count": 1,
+      "undocumented": 0
+    },
+    {
+      "source": "src/shared/mod.rs",
+      "item_count": 1,
+      "undocumented": 0
+    },
+    {
+      "source": "src/state/limits.rs",
+      "item_count": 2,
+      "undocumented": 0
+    },
+    {
+      "source": "src/state/mod.rs",
+      "item_count": 2,
+      "undocumented": 0
+    },
+    {
+      "source": "src/state/sizes.rs",
+      "item_count": 46,
+      "undocumented": 0
+    },
+    {
+      "source": "src/ui/mod.rs",
+      "item_count": 1,
+      "undocumented": 0
+    },
+    {
+      "source": "src/ui/server_ui.rs",
+      "item_count": 1,
+      "undocumented": 0
+    }
+  ]
+}

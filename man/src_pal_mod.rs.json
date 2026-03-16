@@ -1,0 +1,19 @@
+{
+  "source": "src/pal/mod.rs",
+  "items": [
+    {
+      "name": "input_pal",
+      "kind": "Mod",
+      "signature": "pub mod input_pal;",
+      "line": 2,
+      "doc": "Platform abstraction layer  --  Win32 window capture and enigo input."
+    },
+    {
+      "name": "window_pal",
+      "kind": "Mod",
+      "signature": "pub mod window_pal;",
+      "line": 6,
+      "doc": "Platform-specific window operations and abstractions.\n\nProvides a unified interface for creating, managing, and interacting with windows across different operating systems."
+    }
+  ]
+}

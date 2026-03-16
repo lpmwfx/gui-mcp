@@ -1,0 +1,12 @@
+{
+  "source": "src/core/crop_core.rs",
+  "items": [
+    {
+      "name": "crop_region_core",
+      "kind": "Fn",
+      "signature": "pub fn crop_region_core(img: &RgbImage, x: u32, y: u32, w: u32, h: u32) -> Option<RgbImage>",
+      "line": 6,
+      "doc": "Crops a rectangular region from `img` at `(x, y)` with size `(w, h)`.\nReturns `None` if the region extends beyond the image bounds."
+    }
+  ]
+}

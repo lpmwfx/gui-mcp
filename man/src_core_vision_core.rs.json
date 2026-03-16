@@ -1,0 +1,19 @@
+{
+  "source": "src/core/vision_core.rs",
+  "items": [
+    {
+      "name": "MatchResult_core",
+      "kind": "Struct",
+      "signature": "pub struct MatchResult_core",
+      "line": 8,
+      "doc": "Result of a successful template match."
+    },
+    {
+      "name": "find_template",
+      "kind": "Fn",
+      "signature": "pub fn find_template( screenshot: &RgbImage, template: &RgbImage, threshold: Option<f32>, ) -> Option<MatchResult_core>",
+      "line": 19,
+      "doc": "Searches `screenshot` for `template` using NCC.\nReturns the best match centre if its score meets `threshold`."
+    }
+  ]
+}

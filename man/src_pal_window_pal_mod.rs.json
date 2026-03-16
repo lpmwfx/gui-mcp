@@ -1,0 +1,26 @@
+{
+  "source": "src/pal/window_pal/mod.rs",
+  "items": [
+    {
+      "name": "gdi_pal",
+      "kind": "Mod",
+      "signature": "pub(crate) mod gdi_pal;",
+      "line": 4,
+      "doc": "GDI palette abstraction and color management utilities for graphics operations."
+    },
+    {
+      "name": "find_window_by_partial_title",
+      "kind": "Fn",
+      "signature": "pub fn find_window_by_partial_title(partial: &str) -> Result<u64, AppError>",
+      "line": 63,
+      "doc": "Finds the first visible window whose title contains `partial` (case-insensitive)."
+    },
+    {
+      "name": "get_window_rect",
+      "kind": "Fn",
+      "signature": "pub fn get_window_rect(hwnd: u64) -> Result<(i32, i32, i32, i32), AppError>",
+      "line": 92,
+      "doc": "Returns the screen rect (left, top, right, bottom) for `hwnd`."
+    }
+  ]
+}

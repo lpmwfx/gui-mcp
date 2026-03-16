@@ -1,0 +1,19 @@
+{
+  "source": "src/adapter/app_adp/info_adp.rs",
+  "items": [
+    {
+      "name": "get_window_info",
+      "kind": "Fn",
+      "signature": "pub fn get_window_info(window_title: &str) -> Result<String, AppError>",
+      "line": 6,
+      "doc": "Returns JSON with title, rect, width, and height for the named window."
+    },
+    {
+      "name": "list_windows",
+      "kind": "Fn",
+      "signature": "pub fn list_windows() -> Result<String, AppError>",
+      "line": 18,
+      "doc": "Returns a JSON array of visible window titles, sorted alphabetically."
+    }
+  ]
+}

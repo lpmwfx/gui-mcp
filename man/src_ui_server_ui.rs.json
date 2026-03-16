@@ -1,0 +1,12 @@
+{
+  "source": "src/ui/server_ui.rs",
+  "items": [
+    {
+      "name": "SlintGuiServer_ui",
+      "kind": "Struct",
+      "signature": "pub struct SlintGuiServer_ui;",
+      "line": 9,
+      "doc": "MCP server that exposes GUI vision and control tools to AI assistants."
+    }
+  ]
+}

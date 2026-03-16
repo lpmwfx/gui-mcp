@@ -1,0 +1,19 @@
+{
+  "source": "src/core/mod.rs",
+  "items": [
+    {
+      "name": "crop_core",
+      "kind": "Mod",
+      "signature": "pub mod crop_core;",
+      "line": 2,
+      "doc": "Core business logic  --  pure functions, no IO, no platform calls."
+    },
+    {
+      "name": "vision_core",
+      "kind": "Mod",
+      "signature": "pub mod vision_core;",
+      "line": 4,
+      "doc": "Core vision processing functionality including image analysis, computer vision operations, and related utilities."
+    }
+  ]
+}

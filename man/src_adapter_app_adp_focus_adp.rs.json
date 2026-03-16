@@ -1,0 +1,26 @@
+{
+  "source": "src/adapter/app_adp/focus_adp.rs",
+  "items": [
+    {
+      "name": "focused_type_text",
+      "kind": "Fn",
+      "signature": "pub fn focused_type_text(window_title: &str, text: &str) -> Result<(), AppError>",
+      "line": 6,
+      "doc": "Finds the named window and types text into it via WM_CHAR."
+    },
+    {
+      "name": "focused_send_keys",
+      "kind": "Fn",
+      "signature": "pub fn focused_send_keys(window_title: &str, keys: &str) -> Result<(), AppError>",
+      "line": 12,
+      "doc": "Finds the named window and sends a key combination via WM_KEYDOWN/UP."
+    },
+    {
+      "name": "click_at_adp",
+      "kind": "Fn",
+      "signature": "pub fn click_at_adp(window_title: &str, x: i32, y: i32, button: &str) -> Result<(), AppError>",
+      "line": 18,
+      "doc": "Finds the named window and clicks at absolute client coordinates."
+    }
+  ]
+}

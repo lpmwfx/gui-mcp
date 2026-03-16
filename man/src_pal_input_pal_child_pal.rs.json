@@ -1,0 +1,12 @@
+{
+  "source": "src/pal/input_pal/child_pal.rs",
+  "items": [
+    {
+      "name": "find_input_child_pal",
+      "kind": "Fn",
+      "signature": "pub(crate) fn find_input_child_pal(parent: HWND) -> HWND",
+      "line": 12,
+      "doc": "Walks the child tree recursively, preferring known edit class names."
+    }
+  ]
+}

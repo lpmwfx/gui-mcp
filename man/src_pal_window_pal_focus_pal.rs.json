@@ -1,0 +1,12 @@
+{
+  "source": "src/pal/window_pal/focus_pal.rs",
+  "items": [
+    {
+      "name": "focus_window_pal",
+      "kind": "Fn",
+      "signature": "pub fn focus_window_pal(hwnd: u64) -> Result<(), AppError>",
+      "line": 5,
+      "doc": "Calls SetForegroundWindow + short sleep to ensure the window receives input."
+    }
+  ]
+}
