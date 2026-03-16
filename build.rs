@@ -1,4 +1,3 @@
 fn main() {
-    rustdocumenter::document_project();
-    rustscanners::scan_project();
+    rulestools_scanner::scan_project();
 }

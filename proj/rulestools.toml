@@ -2,4 +2,5 @@
 languages = ["rust"]
 
 [project]
+kind = "library"
 deny = false

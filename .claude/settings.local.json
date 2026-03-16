@@ -32,7 +32,14 @@
       "Bash(do echo:*)",
       "Read(//d/REPO/MCP/gui-mcp/**)",
       "Bash(done)",
-      "mcp__rules__list_rules"
+      "mcp__rules__list_rules",
+      "Read(//c/Users/mathi/.claude/**)",
+      "Read(//c/Users/mathi/**)",
+      "mcp__gui-mcp__crop_region",
+      "Bash(pip list:*)",
+      "Bash(pip install:*)",
+      "Bash(pip show:*)",
+      "mcp__rulestools__check_staged"
     ]
   }
 }

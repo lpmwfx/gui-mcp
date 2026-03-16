@@ -1,0 +1,4 @@
+# 2 issues
+
+[KNOWN] \\?\D:\REPO\MCP\gui-mcp\src\core\crop_core.rs:15:1: warning rust/modules/no-inline-mod: inline mod `tests` (24 lines) — extract to tests.rs
+[NEW] \\?\D:\REPO\MCP\gui-mcp\src\core\vision_core.rs:104:1: warning rust/modules/no-inline-mod: inline mod `tests` (62 lines) — extract to tests.rs

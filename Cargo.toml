@@ -30,5 +30,4 @@ rmcp   = { version = "0.1", features = ["client", "transport-io"] }
 tokio  = { version = "1", features = ["full"] }
 
 [build-dependencies]
-rustdocumenter = { git = "https://github.com/lpmwfx/RustDocumenter" }
-rustscanners   = { git = "https://github.com/lpmwfx/RustScanners" }
+rulestools-scanner = { git = "https://github.com/lpmwfx/RulesTools" }

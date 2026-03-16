@@ -1451,21 +1451,9 @@ dependencies = [
 ]
 
 [[package]]
-name = "rustdocumenter"
-version = "0.1.0"
-source = "git+https://github.com/lpmwfx/RustDocumenter#4287df0489665684e96c18a56fc7c465365e4709"
-dependencies = [
- "chrono",
- "regex",
- "serde",
- "serde_json",
- "walkdir",
-]
-
-[[package]]
-name = "rustscanners"
-version = "0.1.0"
-source = "git+https://github.com/lpmwfx/RustScanners#a9926fa9064bec5123fa61699224ec8815fc5260"
+name = "rulestools-scanner"
+version = "0.3.0"
+source = "git+https://github.com/lpmwfx/RulesTools#87e4afc82230045f1b913944f16be2f243346506"
 dependencies = [
  "glob",
  "regex",
@@ -1650,8 +1638,7 @@ dependencies = [
  "image",
  "imageproc",
  "rmcp",
- "rustdocumenter",
- "rustscanners",
+ "rulestools-scanner",
  "serde",
  "serde_json",
  "tokio",
