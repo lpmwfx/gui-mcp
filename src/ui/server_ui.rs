@@ -1,6 +1,7 @@
-/// MCP server — tool definitions and dispatch.
+/// MCP server  --  tool definitions and dispatch.
 use rmcp::{ServerHandler, model::*, tool, Error as McpError};
 use crate::adapter::app_adp;
+use crate::state::sizes::{BURST_DEFAULT_COUNT, BURST_MAX_COUNT, BURST_CONTENT_PER_FRAME};
 
 /// MCP server that exposes GUI vision and control tools to AI assistants.
 #[allow(non_camel_case_types)]
@@ -25,7 +26,7 @@ impl SlintGuiServer_ui {
     }
 
     /// Find a UI element via template matching without clicking.
-    #[tool(description = "Find a UI element via image template matching — returns coordinates without clicking")]
+    #[tool(description = "Find a UI element via image template matching  --  returns coordinates without clicking")]
     async fn find_element(
         &self,
         #[tool(param)] window_title: String,
@@ -97,11 +98,80 @@ impl SlintGuiServer_ui {
         }
     }
 
-    /// List all visible windows — used to discover the correct window title.
+    /// List all visible windows  --  used to discover the correct window title.
     #[tool(description = "List all visible windows with their titles")]
     async fn list_windows(&self) -> Result<CallToolResult, McpError> {
         match app_adp::list_windows() {
             Ok(list_json) => Ok(CallToolResult::success(vec![Content::text(list_json)])),
+            Err(e) => Ok(CallToolResult::error(vec![Content::text(e.to_string())])),
+        }
+    }
+
+    /// Select all text in the edit control of a named window.
+    #[tool(description = "Select all text in a window's edit control (like Ctrl+A but works in background)")]
+    async fn select_all(
+        &self,
+        #[tool(param)] window_title: String,
+    ) -> Result<CallToolResult, McpError> {
+        match app_adp::select_all_adp(&window_title) {
+            Ok(()) => Ok(CallToolResult::success(vec![Content::text("ok")])),
+            Err(e) => Ok(CallToolResult::error(vec![Content::text(e.to_string())])),
+        }
+    }
+
+    /// Copy the current selection to clipboard.
+    #[tool(description = "Copy the current selection in a window to the clipboard (like Ctrl+C but works in background)")]
+    async fn copy(
+        &self,
+        #[tool(param)] window_title: String,
+    ) -> Result<CallToolResult, McpError> {
+        match app_adp::copy_adp(&window_title) {
+            Ok(()) => Ok(CallToolResult::success(vec![Content::text("ok")])),
+            Err(e) => Ok(CallToolResult::error(vec![Content::text(e.to_string())])),
+        }
+    }
+
+    /// Cut the current selection to clipboard.
+    #[tool(description = "Cut the current selection in a window to the clipboard (like Ctrl+X but works in background)")]
+    async fn cut(
+        &self,
+        #[tool(param)] window_title: String,
+    ) -> Result<CallToolResult, McpError> {
+        match app_adp::cut_adp(&window_title) {
+            Ok(()) => Ok(CallToolResult::success(vec![Content::text("ok")])),
+            Err(e) => Ok(CallToolResult::error(vec![Content::text(e.to_string())])),
+        }
+    }
+
+    /// Paste clipboard content into a window's edit control.
+    #[tool(description = "Paste clipboard content into a window's edit control (like Ctrl+V but works in background)")]
+    async fn paste(
+        &self,
+        #[tool(param)] window_title: String,
+    ) -> Result<CallToolResult, McpError> {
+        match app_adp::paste_adp(&window_title) {
+            Ok(()) => Ok(CallToolResult::success(vec![Content::text("ok")])),
+            Err(e) => Ok(CallToolResult::error(vec![Content::text(e.to_string())])),
+        }
+    }
+
+    /// Take a rapid burst of screenshots for near-live GUI monitoring.
+    #[tool(description = "Take multiple screenshots in rapid succession for near-live GUI viewing (default 5 frames, max 10)")]
+    async fn screenshot_burst(
+        &self,
+        #[tool(param)] window_title: String,
+        #[tool(param)] count: Option<usize>,
+    ) -> Result<CallToolResult, McpError> {
+        let n = count.unwrap_or(BURST_DEFAULT_COUNT).min(BURST_MAX_COUNT).max(1);
+        match app_adp::screenshot_burst(&window_title, n) {
+            Ok(frames) => {
+                let mut content: Vec<Content> = Vec::with_capacity(n * BURST_CONTENT_PER_FRAME);
+                for (i, (png, w, h)) in frames.iter().enumerate() {
+                    content.push(Content::image(png.clone(), "image/png"));
+                    content.push(Content::text(format!("frame {} / {}  --  {}x{}", i + 1, n, w, h)));
+                }
+                Ok(CallToolResult::success(content))
+            }
             Err(e) => Ok(CallToolResult::error(vec![Content::text(e.to_string())])),
         }
     }

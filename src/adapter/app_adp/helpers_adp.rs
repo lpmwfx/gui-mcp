@@ -1,4 +1,4 @@
-/// Shared adapter helpers — window capture, template decode, PNG encode.
+/// Shared adapter helpers  --  window capture, template decode, PNG encode.
 use image::RgbImage;
 use base64::{Engine as _, engine::general_purpose::STANDARD};
 use crate::pal::window_pal;

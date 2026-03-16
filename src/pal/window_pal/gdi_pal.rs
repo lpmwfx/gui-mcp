@@ -1,4 +1,4 @@
-/// GDI bitmap capture worker — PrintWindow + GetDIBits → raw BGRA bytes.
+/// GDI bitmap capture worker  --  PrintWindow + GetDIBits -> raw BGRA bytes.
 /// Works on background/hidden windows without SetForegroundWindow.
 use crate::shared::AppError;
 use crate::state::sizes::{CAPTURE_BPP, CAPTURE_BYTES_PER_PIXEL, PW_FULL_CONTENT};

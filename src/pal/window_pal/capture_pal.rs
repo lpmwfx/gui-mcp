@@ -1,4 +1,4 @@
-/// Orchestrates window capture: GDI pixels → BGRA-to-RGB → RgbImage.
+/// Orchestrates window capture: GDI pixels -> BGRA-to-RGB -> RgbImage.
 use image::RgbImage;
 use crate::shared::AppError;
 use crate::state::sizes::{BGRA_B_IDX, BGRA_G_IDX, BGRA_R_IDX, CAPTURE_BYTES_PER_PIXEL, RGB_CHANNELS};

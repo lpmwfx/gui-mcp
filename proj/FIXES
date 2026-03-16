@@ -1,3 +1,10 @@
 # FIXES: slint-gui-mcp
 
-(no fixes yet — project just initialized)
+## Known Limitations
+
+- Capture reliability: `PrintWindow` can fail or return incomplete content for some windows, especially minimized, GPU-accelerated, or non-standard windows.
+- Window targeting: partial title matching can hit the wrong window if multiple visible windows share similar titles.
+- DPI and scaling: coordinates and screenshot/template alignment can drift on high-DPI or mixed-scaling desktop setups.
+- Input strategy: posted mouse and keyboard messages work for many Win32 apps, but not every custom control or security-elevated window will honor them.
+- Tool tests: GUI interaction tests depend on a live Windows desktop session with Notepad available; they are not headless-safe.
+- Modifier combos: PostMessage-based Ctrl+A/C/V does not work because apps call GetKeyState(). Workaround: dedicated select_all/copy/cut/paste tools using EM_SETSEL and WM_COPY/CUT/PASTE messages.

@@ -28,7 +28,7 @@ pub const BGRA_B_IDX: usize = 0;
 /// Milliseconds to wait after SetForegroundWindow before sending input.
 pub const FOCUS_DELAY_MS: u64 = 100;
 
-/// PrintWindow flag: PW_RENDERFULLCONTENT — captures background/hidden windows.
+/// PrintWindow flag: PW_RENDERFULLCONTENT  --  captures background/hidden windows.
 pub const PW_FULL_CONTENT: u32 = 2;
 
 /// Milliseconds to sleep between key-down and key-up messages.
@@ -72,3 +72,27 @@ pub const LPARAM_PREV_STATE_BIT: u32 = 30;
 
 /// Bit position of transition state in WM_KEYUP lParam.
 pub const LPARAM_TRANSITION_BIT: u32 = 31;
+
+/// EM_SETSEL message ID  --  selects text range in an edit control.
+pub const EM_SETSEL_ID: u32 = 0x00B1;
+
+/// WM_COPY message ID  --  copies selection to clipboard.
+pub const WM_COPY_ID: u32 = 0x0301;
+
+/// WM_CUT message ID  --  cuts selection to clipboard.
+pub const WM_CUT_ID: u32 = 0x0300;
+
+/// WM_PASTE message ID  --  pastes clipboard into control.
+pub const WM_PASTE_ID: u32 = 0x0302;
+
+/// Milliseconds to sleep between sequential screenshots for near-live capture.
+pub const SCREENSHOT_INTERVAL_MS: u64 = 200;
+
+/// Default number of frames in a screenshot burst.
+pub const BURST_DEFAULT_COUNT: usize = 5;
+
+/// Maximum number of frames in a screenshot burst.
+pub const BURST_MAX_COUNT: usize = 10;
+
+/// Content entries per frame in burst result (image + text label).
+pub const BURST_CONTENT_PER_FRAME: usize = 2;

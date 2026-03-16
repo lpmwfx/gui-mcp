@@ -1,6 +1,6 @@
 use slint_gui_mcp::ui::server_ui::SlintGuiServer_ui;
 
-/// Entry point — starts the MCP server on stdio transport.
+/// Entry point  --  starts the MCP server on stdio transport.
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let transport = rmcp::transport::io::stdio();

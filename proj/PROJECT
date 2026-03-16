@@ -2,43 +2,63 @@
 
 ## Goal
 A Windows-only MCP server written in Rust that gives AI assistants (e.g. Claude Code) vision
-and control of a running GUI window. Solves the problem of AIs guessing UI positions by
-providing direct visual feedback and image-based interaction via template matching —
-no coordinates needed, AI sends a crop of the UI element and the server finds and clicks it.
+and control of a running GUI window. It reduces GUI guesswork by providing direct visual
+feedback and image-based interaction through template matching rather than hard-coded
+coordinates.
 
 ## Stack
 - Language: Rust (stable, edition 2021)
-- MCP protocol: rmcp 0.1 (community crate, server + transport-io features)
+- MCP protocol: rmcp 0.1 (server + transport-io features)
 - Window capture: windows crate 0.58 (Win32 HWND-based)
-- Image processing: image 0.25, imageproc 0.25 (template matching via NCC)
-- Input: enigo 0.2 (mouse + keyboard, cross-platform)
-- Serialisation: serde 1, serde_json 1, base64 0.22
-- Async runtime: tokio 1 (full features — required by rmcp)
-- Build scanners: rustdocumenter, rustscanners (git deps)
+- Image processing: image 0.25, imageproc 0.25
+- Input: Windows messaging plus focused window control
+- Serialization: serde 1, serde_json 1, base64 0.22
+- Async runtime: tokio 1
+- Build scanners: rustdocumenter, rustscanners
 
 ## Structure
-- src:    src/
-- state:  src/state/
-- proj:   proj/
-- docs:   doc/
+- binary entry: src/main.rs
+- crate root: src/lib.rs
+- UI layer: src/ui/
+- adapter layer: src/adapter/
+- core layer: src/core/
+- platform layer: src/pal/
+- shared errors and support: src/shared/
+- constants and limits: src/state/
+- tests: tests/
+- docs: doc/
+- project control: proj/
 
 ## Method
-- Workflow: PROJECT → FIXES → TODO → code → cargo build → test → DONE
+- Workflow: PROJECT -> FIXES -> TODO -> code -> cargo build -> cargo test -> DONE
 - Branching: feature branches, never commit to main
 - Testing: cargo test
 - Deploy: single binary, no runtime dependencies
 
 ## Patterns
-- window-find: EnumWindows with partial case-insensitive title match → HWND
-- image-capture: GetWindowDC + CreateCompatibleBitmap + BitBlt → BGRA → RgbImage
-- template-match: Normalized cross-correlation (NCC) over RgbImage pairs
-- mcp-tool: #[tool(tool_box)] impl on server struct, one async fn per MCP tool
-- constants: All literal values (thresholds, timeouts) in src/state/ — never inline
+- window-find: partial case-insensitive title match -> HWND
+- image-capture: Win32 capture -> BGRA buffer -> RgbImage -> PNG/base64
+- template-match: normalized cross-correlation (NCC) over RGB images
+- mcp-tool: #[tool(tool_box)] on server struct, one async fn per MCP tool
+- adapter-dispatch: ui -> adapter -> core/pal
+- constants: thresholds, timings, buffer sizes in src/state/
 
 ## Current
-- phase: 1
-- id: scaffold
+- phase: 2
+- id: stabilization
 - status: development
 
+## Implemented
+- 12 MCP tools exposed through rmcp
+- window listing and window info lookup
+- screenshot capture for named windows
+- screenshot burst for near-live GUI monitoring
+- template matching for element lookup
+- click flow with after-screenshot capture
+- type-text and send-keys flows through the platform layer
+- clipboard operations: select_all, copy, cut, paste via Win32 messages
+- smoke tests for MCP registration and core live-window flows
+- negative-path tests for error payloads
+
 ## History
-(none yet)
+- phase 1 / scaffold: layered topology, PAL, core matching, adapter wiring, and MCP tool registration completed

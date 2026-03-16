@@ -2,7 +2,8 @@
 /// Works on background windows without requiring foreground focus.
 mod child_pal;
 mod click_pal;
-/// Vulkan platform abstraction layer providing low-level graphics API bindings and utilities.
+mod clipboard_pal;
+/// Virtual-key code mapping and combo posting.
 pub(crate) mod vk_pal;
 
 use crate::shared::AppError;
@@ -15,13 +16,16 @@ use windows::{
 };
 
 pub use click_pal::click_at;
+pub use clipboard_pal::{select_all_pal, copy_pal, cut_pal, paste_pal};
 
 /// Types text into `hwnd` via WM_CHAR messages. No foreground required.
+/// Converts `\n` to `\r` for RichEdit compatibility.
 pub fn type_text(hwnd: u64, text: &str) -> Result<(), AppError> {
     #[cfg(windows)]
     {
         let target = child_pal::find_input_child_pal(HWND(hwnd as usize as *mut _));
-        for ch in text.encode_utf16() {
+        let normalized = text.replace('\n', "\r");
+        for ch in normalized.encode_utf16() {
             // SAFETY: target is a valid HWND (either the original or a child edit control).
             unsafe {
                 SendMessageW(target, WM_CHAR_ID, WPARAM(ch as usize), LPARAM(0));

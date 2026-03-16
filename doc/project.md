@@ -13,7 +13,7 @@ og udseende ved at give direkte visuel feedback og billedbaseret interaktion.
 ## Kernekoncept
 
 I stedet for koordinatbaseret klik bruges **billedgenkendelse** (template matching):
-AI sender et crop af et UI-element → serveren finder det på skærmen → klikker præcist.
+AI sender et crop af et UI-element -> serveren finder det på skærmen -> klikker præcist.
 Robust over for layout-ændringer. AI behøver ikke kende koordinater på forhånd.
 
 ---
@@ -21,14 +21,14 @@ Robust over for layout-ændringer. AI behøver ikke kende koordinater på forhå
 ## Stack
 
 - **Rust** (stable)
-- **rmcp** – MCP-protokol (community crate, `rmcp` på crates.io)
-- **windows** crate – Win32 API, HWND-baseret window capture
-- **image** crate – billedbehandling og PNG encode/decode
-- **imageproc** crate – template matching (normalized cross-correlation)
-- **enigo** crate – mus og tastaturinput (cross-platform, fungerer på Windows)
-- **base64** crate – encode/decode af billeder til/fra MCP
-- **serde / serde_json** – JSON serialisering
-- **tokio** – async runtime (kræves af rmcp)
+- **rmcp** - MCP-protokol (community crate, `rmcp` på crates.io)
+- **windows** crate - Win32 API, HWND-baseret window capture
+- **image** crate - billedbehandling og PNG encode/decode
+- **imageproc** crate - template matching (normalized cross-correlation)
+- **enigo** crate - mus og tastaturinput (cross-platform, fungerer på Windows)
+- **base64** crate - encode/decode af billeder til/fra MCP
+- **serde / serde_json** - JSON serialisering
+- **tokio** - async runtime (kræves af rmcp)
 
 ---
 
@@ -157,7 +157,7 @@ Find et UI-element vha. template matching og klik på det.
   "success": true,
   "clicked_at": {"x": 450, "y": 230},
   "confidence": 0.94,
-  "screenshot_after": "string  // Base64 PNG efter klik – AI bekræfter resultatet"
+  "screenshot_after": "string  // Base64 PNG efter klik - AI bekræfter resultatet"
 }
 ```
 
@@ -205,7 +205,7 @@ Send tastaturgenvej eller specialtast.
 **Implementation notes:**
 - Parse key-streng og map til `enigo::Key`
 - Håndter modifier+key kombinationer som "ctrl+s":
-  press ctrl → click s → release ctrl
+  press ctrl -> click s -> release ctrl
 
 ---
 
@@ -236,7 +236,7 @@ Hent information om et specifikt vindue.
 ---
 
 ### `list_windows`
-List alle synlige vinduer – bruges til at finde det rigtige vinduestitel.
+List alle synlige vinduer - bruges til at finde det rigtige vinduestitel.
 
 **Input:** ingen
 
@@ -254,7 +254,7 @@ List alle synlige vinduer – bruges til at finde det rigtige vinduestitel.
 
 ## Implementationsdetaljer
 
-### window.rs – HWND capture
+### window.rs - HWND capture
 
 ```rust
 use windows::Win32::Foundation::{HWND, BOOL, LPARAM};
@@ -311,7 +311,7 @@ pub fn capture_window(hwnd: HWND) -> Option<RgbImage> {
         DeleteDC(hdc_mem);
         ReleaseDC(hwnd, hdc_window);
 
-        // BGRA → RGB
+        // BGRA -> RGB
         let rgb: Vec<u8> = buf.chunks(4)
             .flat_map(|p| [p[2], p[1], p[0]])
             .collect();
@@ -323,7 +323,7 @@ pub fn capture_window(hwnd: HWND) -> Option<RgbImage> {
 
 ---
 
-### vision.rs – Template matching uden OpenCV
+### vision.rs - Template matching uden OpenCV
 
 ```rust
 use image::RgbImage;
@@ -407,13 +407,13 @@ fn variance(pixels: &[f32], mean: f32) -> f32 {
 }
 ```
 
-**Performance note:** NCC er O(W×H×tw×th) – tilstrækkeligt til Slint UI-elementer
+**Performance note:** NCC er O(W×H×tw×th) - tilstrækkeligt til Slint UI-elementer
 der typisk er små (knapper, inputfelter). Til store templates kan FFT-baseret matching
 tilføjes med `rustfft` i en senere version.
 
 ---
 
-### actions.rs – Mus og tastatur
+### actions.rs - Mus og tastatur
 
 ```rust
 use enigo::{Enigo, Mouse, Keyboard, Button, Key, Settings, Coordinate, Direction};
@@ -475,7 +475,7 @@ fn parse_key(s: &str) -> Result<Key, String> {
 
 ---
 
-### main.rs – MCP Server
+### main.rs - MCP Server
 
 ```rust
 use rmcp::{ServerHandler, model::*, tool, Error as McpError};
@@ -557,16 +557,16 @@ async fn main() {
 
 ```
 1. list_windows()
-   → Find titlen på Slint-vinduet
+   -> Find titlen på Slint-vinduet
 
 2. screenshot_window(window_title: "My App")
-   → Se hvad der aktuelt vises
+   -> Se hvad der aktuelt vises
 
 3. [AI inspicerer screenshot og laver et crop af det element den vil interagere med]
 
 4. click_element(window_title: "My App", template_base64: "<crop>")
-   → Server finder elementet og klikker – ingen koordinater nødvendige
-   → Returnerer screenshot_after så AI automatisk bekræfter at UI reagerede
+   -> Server finder elementet og klikker - ingen koordinater nødvendige
+   -> Returnerer screenshot_after så AI automatisk bekræfter at UI reagerede
 
 5. [Gentag efter behov]
 ```
@@ -585,17 +585,17 @@ async fn main() {
 }
 ```
 
-Et enkelt binary – ingen runtime, ingen dependencies der skal installeres.
+Et enkelt binary - ingen runtime, ingen dependencies der skal installeres.
 
 ---
 
 ## Kendte begrænsninger
 
-- **Kun Windows** – `windows` crate og HWND er Windows-specifikt.
-- **Minimerede vinduer** – `BitBlt` via HWND virker ikke for minimerede vinduer.
+- **Kun Windows** - `windows` crate og HWND er Windows-specifikt.
+- **Minimerede vinduer** - `BitBlt` via HWND virker ikke for minimerede vinduer.
   Kald `ShowWindow(hwnd, SW_RESTORE)` inden capture.
-- **DPI-skalering** – ved Windows display scaling (fx 150%) afviger koordinater.
+- **DPI-skalering** - ved Windows display scaling (fx 150%) afviger koordinater.
   Sæt DPI-awareness i manifest eller kald `SetProcessDpiAwarenessContext` ved startup.
-- **NCC performance** – tilstrækkelig til små UI-elementer. Overvej `rustfft`-baseret
+- **NCC performance** - tilstrækkelig til små UI-elementer. Overvej `rustfft`-baseret
   matching hvis store templates er et problem.
-- **rmcp stabilitet** – community crate, pin til specifik version i Cargo.toml.
+- **rmcp stabilitet** - community crate, pin til specifik version i Cargo.toml.

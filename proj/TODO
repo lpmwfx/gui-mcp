@@ -1,73 +1,52 @@
-# TODO: scaffold
+# TODO: stabilization
 
-phase: 1
-id: scaffold
+phase: 2
+id: stabilization
 
-## Project Setup
+## Project Control
 
 - id: 1
-  task: Write Cargo.toml with all dependencies (rmcp, tokio, image, imageproc, enigo, base64, serde, windows, rustscanners, rustdocumenter)
-  pass: cargo build compiles without errors
+  task: Update PROJECT, RULES, and TODO so they match the current layered architecture and implemented MCP tools
+  pass: proj files describe ui/adapter/core/pal/shared/state layout and current phase correctly
   status: done
+
+## Verification
 
 - id: 2
-  task: Create build.rs with rustdocumenter and rustscanners
-  pass: cargo build runs scanners without violations
+  task: Keep cargo build and cargo test green while project-control files are updated
+  pass: cargo build and cargo test succeed after proj file changes
   status: done
 
+## Completed In This Phase
+
 - id: 3
-  task: Create src/state/mod.rs, sizes.rs, limits.rs with constants (confidence threshold, buffer size, rgb channels)
-  pass: src/state module compiles and constants are accessible
+  task: Add focused unit tests for src/core/vision_core.rs with deterministic image fixtures
+  pass: cargo test covers successful match, no-match, and threshold edge cases in the core matcher
   status: done
 
 - id: 4
-  task: Create .gitignore (/target)
-  pass: git status does not show target/ directory
+  task: Add MCP-level tests for find_element and click_element using stable fixture images or a controlled test window
+  pass: tool behavior is verified beyond list_windows, screenshot_window, and get_window_info
   status: done
 
-## Topology Scaffold (hexagonal MVVM)
-
 - id: 5
-  task: Create 6-layer topology — src/ui, adapter, core, pal, shared, state
-  pass: all layers compile, topology DAG enforced (ui→adapter→core/pal)
+  task: Record known capture, focus, scaling, and matching limitations in FIXES and docs
+  pass: project control files describe the practical limits of the current implementation
   status: done
 
 - id: 6
-  task: Implement src/ui/server_ui.rs — SlintGuiServer stub with ServerHandler + all 7 tool stubs
-  pass: cargo build passes; rmcp tool list compiles
+  task: Add release and usage documentation for Codex and Claude MCP setup
+  pass: doc folder contains a practical guide for debug/release binary paths and both Codex and Claude configuration examples
   status: done
 
-## PAL Layer (platform abstraction)
+## Next Work
 
 - id: 7
-  task: Implement src/pal/window_pal.rs — find_window_by_partial_title, capture_window, get_window_rect using Win32
-  pass: Can capture screenshot of a real window and get an RgbImage back
+  task: Clean up mojibake and encoding issues in comments and docs
+  pass: project docs and comments render correctly as UTF-8 text
   status: done
 
 - id: 8
-  task: Implement src/pal/input_pal.rs — click_at, type_text, send_keys using enigo
-  pass: Clicking at known coordinates moves the mouse to the correct position
+  task: Add negative-path MCP tests for missing windows, invalid template data, and low-confidence matches
+  pass: tool-level failures are verified and return stable error payloads
   status: done
-
-## Core Layer (business logic)
-
-- id: 9
-  task: Implement src/core/vision_core.rs — find_template NCC algorithm (stubs replaced)
-  pass: find_template returns correct MatchResult on a known test image pair
-  status: done
-
-## Adapter + UI dispatch
-
-- id: 10
-  task: Wire src/adapter/app_adp.rs dispatch functions to real PAL/Core implementations
-  pass: screenshot_window returns a valid base64 PNG for a real window
-  status: done
-
-- id: 11
-  task: Wire src/ui/server_ui.rs tool stubs to app_adp calls; replace todo!() with real dispatch
-  pass: MCP server responds correctly to screenshot_window and list_windows tool calls
-  status: done
-
-## Blockers
-
-- rmcp API verified: #[tool(tool_box)] + impl ServerHandler compiles with rmcp 0.1.5

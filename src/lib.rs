@@ -1,4 +1,4 @@
-/// Library crate — exposes all layers for integration tests and tooling.
+/// Library crate  --  exposes all layers for integration tests and tooling.
 pub mod adapter;
 /// Core types and functionality for this crate.
 pub mod core;

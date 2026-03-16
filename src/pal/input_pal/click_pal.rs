@@ -1,4 +1,4 @@
-/// Mouse click via PostMessage — works on background windows.
+/// Mouse click via PostMessage  --  works on background windows.
 use crate::shared::AppError;
 use crate::state::sizes::{KEY_EVENT_DELAY_MS, MOUSE_COORD_MASK, MOUSE_LPARAM_Y_SHIFT};
 

@@ -18,7 +18,7 @@ struct CollectState_pal {
 
 #[cfg(windows)]
 fn read_title_pal(hwnd: HWND) -> Option<String> {
-    // SAFETY: hwnd comes from EnumWindows — a live system-managed handle.
+    // SAFETY: hwnd comes from EnumWindows  --  a live system-managed handle.
     let len = unsafe { GetWindowTextLengthW(hwnd) };
     if len == 0 {
         return None;

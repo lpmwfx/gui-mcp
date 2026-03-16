@@ -1,4 +1,4 @@
-/// Platform abstraction layer — Win32 window capture and enigo input.
+/// Platform abstraction layer  --  Win32 window capture and enigo input.
 pub mod input_pal;
 /// Platform-specific window operations and abstractions.
 ///
