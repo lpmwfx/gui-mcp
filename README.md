@@ -150,4 +150,4 @@ src/
 
 ## License
 
-MIT
+[EUPL-1.2](LICENSE) -- European Union Public Licence v. 1.2
