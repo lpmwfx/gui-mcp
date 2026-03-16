@@ -18,14 +18,16 @@
 - rust/modules.md
 
 ## Project Rules
-- All Win32 unsafe calls are isolated in `src/window.rs` — no unsafe in other modules
-- Template matching lives exclusively in `src/vision.rs`
-- Mouse/keyboard actions live exclusively in `src/actions.rs`
-- MCP tool dispatch and server setup live exclusively in `src/main.rs`
-- All numeric constants (confidence thresholds, timeouts, buffer sizes) live in `src/state/`
-- Windows-platform dependencies are declared under `[target.'cfg(windows)'.dependencies]`
-- enigo and rmcp are used only in `src/actions.rs` and `src/main.rs` respectively
-- `SetForegroundWindow` must be called before every capture or click action
+- MCP tool definitions and result formatting live in `src/ui/server_ui.rs`
+- The UI layer may call only the adapter layer
+- The adapter layer coordinates core and PAL calls and should not contain Win32 unsafe code
+- Template matching lives in `src/core/vision_core.rs`
+- Win32 window and input operations live in `src/pal/`
+- Unsafe Win32 calls stay isolated to PAL modules
+- All numeric constants live in `src/state/`
+- Windows-only dependencies stay under `[target.'cfg(windows)'.dependencies]`
+- `rmcp` stays at the UI/server boundary
+- Capture and click paths must bring the target window into a usable state before acting
 
 ## Derived from FIXES
 (none yet)

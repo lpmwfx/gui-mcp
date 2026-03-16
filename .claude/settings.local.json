@@ -27,7 +27,12 @@
       "mcp__gui-mcp__send_keys",
       "mcp__gui-mcp__type_text",
       "Bash(start:*)",
-      "Bash(cp:*)"
+      "Bash(cp:*)",
+      "Bash(for f:*)",
+      "Bash(do echo:*)",
+      "Read(//d/REPO/MCP/gui-mcp/**)",
+      "Bash(done)",
+      "mcp__rules__list_rules"
     ]
   }
 }
