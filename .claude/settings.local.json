@@ -39,7 +39,11 @@
       "Bash(pip list:*)",
       "Bash(pip install:*)",
       "Bash(pip show:*)",
-      "mcp__rulestools__check_staged"
+      "mcp__rulestools__check_staged",
+      "WebFetch(domain:joinup.ec.europa.eu)",
+      "WebFetch(domain:interoperable-europe.ec.europa.eu)",
+      "Bash(curl -sL \"https://interoperable-europe.ec.europa.eu/sites/default/files/custom-page/attachment/2020-03/EUPL-1.2%20EN.txt\" -o /tmp/eupl12.txt)",
+      "Read(//tmp/**)"
     ]
   }
 }
