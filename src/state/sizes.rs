@@ -99,3 +99,29 @@ pub const BURST_CONTENT_PER_FRAME: usize = 2;
 
 /// Total number of MCP tools registered by the server.
 pub const EXPECTED_TOOL_COUNT: usize = 14;
+
+/// Maximum haystack dimension for NCC search in crop-then-find tests (debug-safe).
+pub const CROP_FIND_MAX_DIM: u32 = 200;
+
+/// Test pixel pattern coefficients for deterministic image generation.
+pub const TEST_PIXEL_R_X: u32 = 17;
+/// Test pixel pattern coefficient for R channel Y component.
+pub const TEST_PIXEL_R_Y: u32 = 3;
+/// Test pixel pattern modulus for R channel.
+pub const TEST_PIXEL_R_MOD: u32 = 251;
+/// Test pixel pattern coefficient for G channel X component.
+pub const TEST_PIXEL_G_X: u32 = 7;
+/// Test pixel pattern coefficient for G channel Y component.
+pub const TEST_PIXEL_G_Y: u32 = 19;
+/// Test pixel pattern offset for G channel.
+pub const TEST_PIXEL_G_OFF: u32 = 11;
+/// Test pixel pattern modulus for G channel.
+pub const TEST_PIXEL_G_MOD: u32 = 241;
+/// Test pixel pattern coefficient for B channel X component.
+pub const TEST_PIXEL_B_X: u32 = 13;
+/// Test pixel pattern coefficient for B channel Y component.
+pub const TEST_PIXEL_B_Y: u32 = 5;
+/// Test pixel pattern offset for B channel.
+pub const TEST_PIXEL_B_OFF: u32 = 23;
+/// Test pixel pattern modulus for B channel.
+pub const TEST_PIXEL_B_MOD: u32 = 239;

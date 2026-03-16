@@ -81,3 +81,37 @@ fn test_get_window_info() -> TestResult {
     assert!(info_json.contains("width"), "Expected width in JSON");
     Ok(())
 }
+
+/// Crops a region from a screenshot, crops a sub-template, finds it back via NCC.
+#[test]
+fn test_crop_then_find() -> TestResult {
+    use slint_gui_mcp::core::crop_core;
+    use slint_gui_mcp::core::vision_core;
+    use slint_gui_mcp::state::sizes::CROP_FIND_MAX_DIM;
+    let titles = window_pal::list_window_titles_pal()?;
+    for title in &titles {
+        let hwnd = window_pal::find_window_by_partial_title(title);
+        if hwnd.is_err() { continue; }
+        let capture = window_pal::capture_window(hwnd.unwrap());
+        if capture.is_err() { continue; }
+        let full = capture.unwrap();
+        let (fw, fh) = full.dimensions();
+        if fw < 200 || fh < 200 { continue; }
+        let haystack_w = fw.min(CROP_FIND_MAX_DIM);
+        let haystack_h = fh.min(CROP_FIND_MAX_DIM);
+        let haystack = crop_core::crop_region_core(&full, 0, 0, haystack_w, haystack_h);
+        if haystack.is_none() { continue; }
+        let haystack = haystack.unwrap();
+        let template = crop_core::crop_region_core(&haystack, 10, 10, 60, 40);
+        if template.is_none() { continue; }
+        let template = template.unwrap();
+        let match_found = vision_core::find_template(&haystack, &template, None);
+        if let Some(m) = match_found {
+            println!("\n=== crop_then_find: {title} (haystack {haystack_w}x{haystack_h}) ===");
+            println!("  found at ({},{}) conf={:.3}", m.x, m.y, m.confidence);
+            assert!(m.confidence > 0.9, "Self-crop should match with high confidence");
+            return Ok(());
+        }
+    }
+    Err("No window produced a successful crop->find cycle".into())
+}

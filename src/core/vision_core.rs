@@ -104,6 +104,11 @@ fn variance(pixels: &[f32], mean: f32) -> f32 {
 mod tests {
     use super::*;
     use image::{imageops, Rgb, RgbImage};
+    use crate::state::sizes::{
+        TEST_PIXEL_R_X, TEST_PIXEL_R_Y, TEST_PIXEL_R_MOD,
+        TEST_PIXEL_G_X, TEST_PIXEL_G_Y, TEST_PIXEL_G_OFF, TEST_PIXEL_G_MOD,
+        TEST_PIXEL_B_X, TEST_PIXEL_B_Y, TEST_PIXEL_B_OFF, TEST_PIXEL_B_MOD,
+    };
 
     fn patterned_image(width: u32, height: u32) -> RgbImage {
         let mut img = RgbImage::new(width, height);
@@ -113,9 +118,9 @@ mod tests {
                     x,
                     y,
                     Rgb([
-                        ((x * 17 + y * 3) % 251) as u8,
-                        ((x * 7 + y * 19 + 11) % 241) as u8,
-                        ((x * 13 + y * 5 + 23) % 239) as u8,
+                        ((x * TEST_PIXEL_R_X + y * TEST_PIXEL_R_Y) % TEST_PIXEL_R_MOD) as u8,
+                        ((x * TEST_PIXEL_G_X + y * TEST_PIXEL_G_Y + TEST_PIXEL_G_OFF) % TEST_PIXEL_G_MOD) as u8,
+                        ((x * TEST_PIXEL_B_X + y * TEST_PIXEL_B_Y + TEST_PIXEL_B_OFF) % TEST_PIXEL_B_MOD) as u8,
                     ]),
                 );
             }
