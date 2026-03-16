@@ -4,6 +4,7 @@ use slint_gui_mcp::ui::server_ui::SlintGuiServer_ui;
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let transport = rmcp::transport::io::stdio();
-    rmcp::serve_server(SlintGuiServer_ui, transport).await?;
+    let server = rmcp::serve_server(SlintGuiServer_ui, transport).await?;
+    server.waiting().await?;
     Ok(())
 }
