@@ -14,6 +14,8 @@ pub enum AppError_x {
     InputError(String),
 }
 
+impl std::error::Error for AppError_x {}
+
 impl std::fmt::Display for AppError_x {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {

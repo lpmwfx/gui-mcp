@@ -1,8 +1,5 @@
-mod adapter;
-mod core;
-mod pal;
-mod shared;
-mod state;
+// Re-export library modules so `crate::adapter` etc. resolves inside `mod ui`.
+pub use slint_gui_mcp::{adapter, core, pal, shared, state};
 mod ui;
 
 use ui::server_ui::SlintGuiServer_ui;

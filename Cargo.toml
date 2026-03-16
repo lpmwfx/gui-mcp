@@ -21,6 +21,10 @@ windows = { version = "0.58", features = [
     "Win32_System_Memory",
 ] }
 
+[dev-dependencies]
+base64 = "0.22"
+image  = "0.25"
+
 [build-dependencies]
 rustdocumenter = { git = "https://github.com/lpmwfx/RustDocumenter" }
 rustscanners   = { git = "https://github.com/lpmwfx/RustScanners" }
