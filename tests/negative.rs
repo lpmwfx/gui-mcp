@@ -152,3 +152,47 @@ async fn test_screenshot_burst_missing_window() -> TestResult {
     let _ = client.cancel().await;
     Ok(())
 }
+
+/// click_at with a non-existent window returns an error result.
+#[tokio::test]
+async fn test_click_at_missing_window() -> TestResult {
+    let client = connected_client().await?;
+    let result_mcp = client
+        .call_tool(CallToolRequestParam {
+            name: Cow::Borrowed("click_at"),
+            arguments: json!({
+                "window_title": "nonexistent-window-xyz-12345",
+                "x": 10,
+                "y": 20,
+            })
+            .as_object().cloned(),
+        })
+        .await
+        .map_err(|e| format!("call_tool: {e}"))?;
+    assert_eq!(result_mcp.is_error, Some(true), "Expected error for missing window");
+    let _ = client.cancel().await;
+    Ok(())
+}
+
+/// crop_region with a non-existent window returns an error result.
+#[tokio::test]
+async fn test_crop_region_missing_window() -> TestResult {
+    let client = connected_client().await?;
+    let result_mcp = client
+        .call_tool(CallToolRequestParam {
+            name: Cow::Borrowed("crop_region"),
+            arguments: json!({
+                "window_title": "nonexistent-window-xyz-12345",
+                "x": 0,
+                "y": 0,
+                "width": 50,
+                "height": 50,
+            })
+            .as_object().cloned(),
+        })
+        .await
+        .map_err(|e| format!("call_tool: {e}"))?;
+    assert_eq!(result_mcp.is_error, Some(true), "Expected error for missing window");
+    let _ = client.cancel().await;
+    Ok(())
+}

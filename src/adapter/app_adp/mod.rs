@@ -2,6 +2,7 @@
 mod burst_adp;
 mod click_adp;
 mod clipboard_adp;
+mod crop_adp;
 mod find_adp;
 mod focus_adp;
 mod helpers_adp;
@@ -11,8 +12,9 @@ mod screenshot_adp;
 pub use burst_adp::screenshot_burst;
 pub use click_adp::click_element;
 pub use clipboard_adp::{select_all_adp, copy_adp, cut_adp, paste_adp};
+pub use crop_adp::crop_region_adp;
 pub use find_adp::find_element;
-pub use focus_adp::{focused_type_text, focused_send_keys};
+pub use focus_adp::{focused_type_text, focused_send_keys, click_at_adp};
 pub use info_adp::{get_window_info, list_windows};
 pub use screenshot_adp::screenshot_window;
 pub(crate) use helpers_adp::{

@@ -1,7 +1,7 @@
-# TODO: stabilization
+# TODO: precision
 
-phase: 2
-id: stabilization
+phase: 3
+id: precision
 
 ## Project Control
 
@@ -49,4 +49,26 @@ id: stabilization
 - id: 8
   task: Add negative-path MCP tests for missing windows, invalid template data, and low-confidence matches
   pass: tool-level failures are verified and return stable error payloads
+  status: done
+
+## Phase 3 Tasks
+
+- id: 9
+  task: Add click_at MCP tool -- click at absolute client coordinates without template matching
+  pass: click_at tool registered, adapter wired, negative test passes
+  status: done
+
+- id: 10
+  task: Add crop_region MCP tool -- crop a rectangle from a window screenshot and return as base64 PNG
+  pass: crop_region tool registered, core + adapter wired, unit tests and negative test pass
+  status: done
+
+- id: 11
+  task: Create proj/PHASES roadmap file documenting all phases
+  pass: proj/PHASES exists with phases 1-4
+  status: done
+
+- id: 12
+  task: Deploy release binary and verify 14 tools load
+  pass: cargo build --release succeeds, gui-mcp.exe deployed, 14 tools registered
   status: done

@@ -155,6 +155,40 @@ impl SlintGuiServer_ui {
         }
     }
 
+    /// Click at absolute client coordinates in a named window.
+    #[tool(description = "Click at pixel coordinates (x, y) inside a window -- no template matching needed")]
+    async fn click_at(
+        &self,
+        #[tool(param)] window_title: String,
+        #[tool(param)] x: i32,
+        #[tool(param)] y: i32,
+        #[tool(param)] button: Option<String>,
+    ) -> Result<CallToolResult, McpError> {
+        let btn = button.as_deref().unwrap_or("left");
+        match app_adp::click_at_adp(&window_title, x, y, btn) {
+            Ok(()) => Ok(CallToolResult::success(vec![Content::text("ok")])),
+            Err(e) => Ok(CallToolResult::error(vec![Content::text(e.to_string())])),
+        }
+    }
+
+    /// Crop a rectangular region from a window screenshot and return as base64 PNG.
+    #[tool(description = "Crop a region (x, y, width, height) from a window screenshot and return it as base64 PNG -- useful for creating reusable templates")]
+    async fn crop_region(
+        &self,
+        #[tool(param)] window_title: String,
+        #[tool(param)] x: u32,
+        #[tool(param)] y: u32,
+        #[tool(param)] width: u32,
+        #[tool(param)] height: u32,
+    ) -> Result<CallToolResult, McpError> {
+        match app_adp::crop_region_adp(&window_title, x, y, width, height) {
+            Ok(png_b64) => Ok(CallToolResult::success(vec![
+                Content::image(png_b64, "image/png"),
+            ])),
+            Err(e) => Ok(CallToolResult::error(vec![Content::text(e.to_string())])),
+        }
+    }
+
     /// Take a rapid burst of screenshots for near-live GUI monitoring.
     #[tool(description = "Take multiple screenshots in rapid succession for near-live GUI viewing (default 5 frames, max 10)")]
     async fn screenshot_burst(

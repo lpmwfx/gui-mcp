@@ -44,12 +44,12 @@ coordinates.
 - constants: thresholds, timings, buffer sizes in src/state/
 
 ## Current
-- phase: 2
-- id: stabilization
+- phase: 3
+- id: precision
 - status: development
 
 ## Implemented
-- 12 MCP tools exposed through rmcp
+- 14 MCP tools exposed through rmcp
 - window listing and window info lookup
 - screenshot capture for named windows
 - screenshot burst for near-live GUI monitoring
@@ -58,7 +58,10 @@ coordinates.
 - type-text and send-keys flows through the platform layer
 - clipboard operations: select_all, copy, cut, paste via Win32 messages
 - smoke tests for MCP registration and core live-window flows
+- click_at: click at absolute client coordinates without template matching
+- crop_region: crop a window region and return as base64 PNG for template reuse
 - negative-path tests for error payloads
 
 ## History
 - phase 1 / scaffold: layered topology, PAL, core matching, adapter wiring, and MCP tool registration completed
+- phase 2 / stabilization: +5 tools (clipboard, burst), encoding cleanup, negative tests, background capture

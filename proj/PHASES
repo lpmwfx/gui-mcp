@@ -1,0 +1,27 @@
+# PHASES: slint-gui-mcp
+
+## Phase 1 / scaffold (done)
+- 6-layer hexagonal MVVM topology (ui / adapter / core / pal / shared / state)
+- 7 original MCP tools: screenshot_window, find_element, click_element, type_text, send_keys, get_window_info, list_windows
+- Core NCC template matcher (vision_core)
+- Win32 PAL: HWND find, GDI capture, PostMessage input
+- Smoke tests for tool registration and live-window flows
+
+## Phase 2 / stabilization (done)
+- +5 MCP tools: select_all, copy, cut, paste, screenshot_burst
+- Encoding cleanup (UTF-8 comments and docs)
+- Background capture via PrintWindow + SendMessage (no foreground steal)
+- Negative-path tests for error payloads
+- Split GUI notepad tests into dedicated test file
+
+## Phase 3 / precision (current)
+- +2 MCP tools: click_at, crop_region
+- click_at: click at absolute client coordinates without template matching
+- crop_region: crop a rectangle from a window screenshot and return as base64 PNG
+- Template library support: AI can capture regions and reuse them as templates
+
+## Phase 4 / robustness (planned)
+- HWND-id targeting: bypass title matching for known windows
+- DPI-aware coordinates: scale coords for high-DPI and mixed-DPI setups
+- WM_GETTEXT / WM_SETTEXT: read and write edit control text directly
+- GPU fallback: alternative capture path for GPU-accelerated windows

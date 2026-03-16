@@ -25,7 +25,7 @@ async fn test_mcp_tools_registered() -> TestResult {
         .await
         .map_err(|e| format!("tools/list: {e}"))?;
 
-    assert_eq!(tools_list.tools.len(), 12, "Expected 12 MCP tools");
+    assert_eq!(tools_list.tools.len(), slint_gui_mcp::state::sizes::EXPECTED_TOOL_COUNT, "Expected 14 MCP tools");
 
     let _ = client.cancel().await;
     server_handle.abort();

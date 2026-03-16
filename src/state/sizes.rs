@@ -96,3 +96,6 @@ pub const BURST_MAX_COUNT: usize = 10;
 
 /// Content entries per frame in burst result (image + text label).
 pub const BURST_CONTENT_PER_FRAME: usize = 2;
+
+/// Total number of MCP tools registered by the server.
+pub const EXPECTED_TOOL_COUNT: usize = 14;
