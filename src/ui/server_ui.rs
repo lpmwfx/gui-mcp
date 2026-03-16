@@ -1,5 +1,6 @@
 /// MCP server — tool definitions and dispatch.
 use rmcp::{ServerHandler, model::*, tool, Error as McpError};
+use crate::adapter::app_adp;
 
 /// MCP server that exposes GUI vision and control tools to AI assistants.
 #[allow(non_camel_case_types)]
@@ -14,7 +15,13 @@ impl SlintGuiServer_ui {
         &self,
         #[tool(param)] window_title: String,
     ) -> Result<CallToolResult, McpError> {
-        todo!("dispatch to app_adp::screenshot_window")
+        match app_adp::screenshot_window(&window_title) {
+            Ok((png, w, h, _)) => Ok(CallToolResult::success(vec![
+                Content::image(png, "image/png"),
+                Content::text(format!("{w}x{h}")),
+            ])),
+            Err(e) => Ok(CallToolResult::error(vec![Content::text(e.to_string())])),
+        }
     }
 
     /// Find a UI element via template matching without clicking.
@@ -25,7 +32,13 @@ impl SlintGuiServer_ui {
         #[tool(param)] template_base64: String,
         #[tool(param)] confidence: Option<f32>,
     ) -> Result<CallToolResult, McpError> {
-        todo!("dispatch to app_adp::find_element")
+        match app_adp::find_element(&window_title, &template_base64, confidence) {
+            Ok(Some((x, y, w, h, conf))) => Ok(CallToolResult::success(vec![
+                Content::text(format!(r#"{{"x":{x},"y":{y},"width":{w},"height":{h},"confidence":{conf}}}"#)),
+            ])),
+            Ok(None) => Ok(CallToolResult::success(vec![Content::text("null")])),
+            Err(e) => Ok(CallToolResult::error(vec![Content::text(e.to_string())])),
+        }
     }
 
     /// Find a UI element via template matching and click it.
@@ -37,7 +50,13 @@ impl SlintGuiServer_ui {
         #[tool(param)] confidence: Option<f32>,
         #[tool(param)] button: Option<String>,
     ) -> Result<CallToolResult, McpError> {
-        todo!("dispatch to app_adp::click_element")
+        match app_adp::click_element(&window_title, &template_base64, confidence, button.as_deref()) {
+            Ok((x, y, conf, after_png)) => Ok(CallToolResult::success(vec![
+                Content::image(after_png, "image/png"),
+                Content::text(format!(r#"{{"x":{x},"y":{y},"confidence":{conf}}}"#)),
+            ])),
+            Err(e) => Ok(CallToolResult::error(vec![Content::text(e.to_string())])),
+        }
     }
 
     /// Type text into the currently focused element.
@@ -46,7 +65,10 @@ impl SlintGuiServer_ui {
         &self,
         #[tool(param)] text: String,
     ) -> Result<CallToolResult, McpError> {
-        todo!("dispatch to app_adp::type_text")
+        match app_adp::type_text(&text) {
+            Ok(()) => Ok(CallToolResult::success(vec![Content::text("ok")])),
+            Err(e) => Ok(CallToolResult::error(vec![Content::text(e.to_string())])),
+        }
     }
 
     /// Send a key combination such as ctrl+s, enter, or tab.
@@ -55,7 +77,10 @@ impl SlintGuiServer_ui {
         &self,
         #[tool(param)] keys: String,
     ) -> Result<CallToolResult, McpError> {
-        todo!("dispatch to app_adp::send_keys")
+        match app_adp::send_keys(&keys) {
+            Ok(()) => Ok(CallToolResult::success(vec![Content::text("ok")])),
+            Err(e) => Ok(CallToolResult::error(vec![Content::text(e.to_string())])),
+        }
     }
 
     /// Get information about a specific window by title.
@@ -64,13 +89,19 @@ impl SlintGuiServer_ui {
         &self,
         #[tool(param)] window_title: String,
     ) -> Result<CallToolResult, McpError> {
-        todo!("dispatch to app_adp::get_window_info")
+        match app_adp::get_window_info(&window_title) {
+            Ok(info_json) => Ok(CallToolResult::success(vec![Content::text(info_json)])),
+            Err(e) => Ok(CallToolResult::error(vec![Content::text(e.to_string())])),
+        }
     }
 
     /// List all visible windows — used to discover the correct window title.
     #[tool(description = "List all visible windows with their titles")]
     async fn list_windows(&self) -> Result<CallToolResult, McpError> {
-        todo!("dispatch to app_adp::list_windows")
+        match app_adp::list_windows() {
+            Ok(list_json) => Ok(CallToolResult::success(vec![Content::text(list_json)])),
+            Err(e) => Ok(CallToolResult::error(vec![Content::text(e.to_string())])),
+        }
     }
 }
 

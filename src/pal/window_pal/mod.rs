@@ -2,9 +2,11 @@
 mod capture_pal;
 /// GDI palette abstraction and color management utilities for graphics operations.
 pub(crate) mod gdi_pal;
+mod list_pal;
 
 pub use capture_pal::capture_window;
 pub(crate) use gdi_pal::gdi_capture_raw_pal;
+pub use list_pal::list_window_titles_pal;
 
 use crate::shared::AppError;
 use crate::state::sizes::{TITLE_BUF_PADDING, WINDOW_TITLE_BUF};

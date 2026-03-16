@@ -2,10 +2,12 @@
 mod click_adp;
 mod find_adp;
 mod helpers_adp;
+mod info_adp;
 mod screenshot_adp;
 
 pub use click_adp::click_element;
 pub use find_adp::find_element;
+pub use info_adp::{get_window_info, list_windows};
 pub use crate::pal::input_pal::{click_at, send_keys, type_text};
 pub use screenshot_adp::screenshot_window;
 pub(crate) use helpers_adp::{
