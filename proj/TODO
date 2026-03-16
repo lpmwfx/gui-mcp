@@ -66,7 +66,7 @@ id: scaffold
 - id: 11
   task: Wire src/ui/server_ui.rs tool stubs to app_adp calls; replace todo!() with real dispatch
   pass: MCP server responds correctly to screenshot_window and list_windows tool calls
-  status: pending
+  status: done
 
 ## Blockers
 
