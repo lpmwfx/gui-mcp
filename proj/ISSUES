@@ -1,4 +1,7 @@
-# 2 issues
+# 5 issues
 
-[KNOWN] \\?\D:\REPO\MCP\gui-mcp\src\core\crop_core.rs:15:1: warning rust/modules/no-inline-mod: inline mod `tests` (24 lines) — extract to tests.rs
-[KNOWN] \\?\D:\REPO\MCP\gui-mcp\src\core\vision_core.rs:104:1: warning rust/modules/no-inline-mod: inline mod `tests` (62 lines) — extract to tests.rs
+[KNOWN] \\?\D:\REPO\RUSTPROJECTS\MCP\gui-mcp\src\pal\input_pal\child_pal.rs:19:1: error rust/safety/unsafe-needs-comment: unsafe block without // SAFETY: comment [rust/safety.md]
+[KNOWN] \\?\D:\REPO\RUSTPROJECTS\MCP\gui-mcp\src\pal\window_pal\list_pal.rs:38:1: error rust/safety/unsafe-needs-comment: unsafe block without // SAFETY: comment [rust/safety.md]
+[KNOWN] \\?\D:\REPO\RUSTPROJECTS\MCP\gui-mcp\src\pal\window_pal\mod.rs:33:1: error rust/safety/unsafe-needs-comment: unsafe block without // SAFETY: comment [rust/safety.md]
+[KNOWN] \\?\D:\REPO\RUSTPROJECTS\MCP\gui-mcp\src\core\crop_core.rs:15:1: warning rust/modules/no-inline-mod: inline mod `tests` (24 lines) — extract to tests.rs [rust/modules.md]
+[KNOWN] \\?\D:\REPO\RUSTPROJECTS\MCP\gui-mcp\src\core\vision_core.rs:104:1: warning rust/modules/no-inline-mod: inline mod `tests` (62 lines) — extract to tests.rs [rust/modules.md]

@@ -5,6 +5,6 @@
 - Capture reliability: `PrintWindow` can fail or return incomplete content for some windows, especially minimized, GPU-accelerated, or non-standard windows.
 - Window targeting: partial title matching can hit the wrong window if multiple visible windows share similar titles.
 - DPI and scaling: coordinates and screenshot/template alignment can drift on high-DPI or mixed-scaling desktop setups.
-- Input strategy: posted mouse and keyboard messages work for many Win32 apps, but not every custom control or security-elevated window will honor them.
+- Input strategy: mouse clicks and keyboard input use SendInput (hardware-level injection). This works for all window types including Slint/winit/OpenGL, but requires foreground focus -- the target window is brought to front before input.
 - Tool tests: GUI interaction tests depend on a live Windows desktop session with Notepad available; they are not headless-safe.
-- Modifier combos: PostMessage-based Ctrl+A/C/V does not work because apps call GetKeyState(). Workaround: dedicated select_all/copy/cut/paste tools using EM_SETSEL and WM_COPY/CUT/PASTE messages.
+- Modifier combos: SendInput-based key combos work with apps that call GetKeyState(). Clipboard operations still use dedicated select_all/copy/cut/paste tools via EM_SETSEL and WM_COPY/CUT/PASTE messages for maximum compatibility.

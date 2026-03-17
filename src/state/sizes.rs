@@ -34,44 +34,11 @@ pub const PW_FULL_CONTENT: u32 = 2;
 /// Milliseconds to sleep between key-down and key-up messages.
 pub const KEY_EVENT_DELAY_MS: u64 = 10;
 
-/// WM_CHAR message ID.
-pub const WM_CHAR_ID: u32 = 0x0102;
-
-/// WM_KEYDOWN message ID.
-pub const WM_KEYDOWN_ID: u32 = 0x0100;
-
-/// WM_KEYUP message ID.
-pub const WM_KEYUP_ID: u32 = 0x0101;
-
-/// WM_LBUTTONDOWN message ID.
-pub const WM_LBUTTONDOWN_ID: u32 = 0x0201;
-
-/// WM_LBUTTONUP message ID.
-pub const WM_LBUTTONUP_ID: u32 = 0x0202;
-
-/// WM_RBUTTONDOWN message ID.
-pub const WM_RBUTTONDOWN_ID: u32 = 0x0204;
-
-/// WM_RBUTTONUP message ID.
-pub const WM_RBUTTONUP_ID: u32 = 0x0205;
-
-/// Shift for y-coordinate in LPARAM for mouse messages.
-pub const MOUSE_LPARAM_Y_SHIFT: i32 = 16;
-
-/// Mask for coordinate packing in mouse LPARAM.
-pub const MOUSE_COORD_MASK: i32 = 0xFFFF;
+/// SendInput absolute coordinate range (0..65535 maps to full screen).
+pub const SENDINPUT_COORD_RANGE: i64 = 65536;
 
 /// Buffer size for GetClassNameW result.
 pub const CLASS_NAME_BUF: usize = 256;
-
-/// Bit position of scan code in WM_KEYDOWN/UP lParam.
-pub const LPARAM_SCANCODE_SHIFT: u32 = 16;
-
-/// Bit position of previous key state in WM_KEYDOWN/UP lParam.
-pub const LPARAM_PREV_STATE_BIT: u32 = 30;
-
-/// Bit position of transition state in WM_KEYUP lParam.
-pub const LPARAM_TRANSITION_BIT: u32 = 31;
 
 /// EM_SETSEL message ID  --  selects text range in an edit control.
 pub const EM_SETSEL_ID: u32 = 0x00B1;

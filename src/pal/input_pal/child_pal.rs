@@ -16,6 +16,7 @@ pub(crate) fn find_input_child_pal(parent: HWND) -> HWND {
         depth: usize,
     }
 
+    // SAFETY: callback is only invoked by EnumChildWindows with a valid lparam pointer.
     unsafe extern "system" fn child_callback(hwnd: HWND, lparam: LPARAM) -> BOOL {
         // SAFETY: lparam is a valid pointer to ChildSearch_pal, alive for EnumChildWindows.
         let search_pal = &mut *(lparam.0 as *mut ChildSearch_pal);

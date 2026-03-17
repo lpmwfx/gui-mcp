@@ -10,7 +10,7 @@ pub enum AppError_x {
     ImageError(String),
     /// Template not found above confidence threshold.
     TemplateNotFound { confidence: f32, threshold: f32 },
-    /// Input device error from enigo.
+    /// Input operation error.
     InputError(String),
 }
 

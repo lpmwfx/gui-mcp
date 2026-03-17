@@ -30,6 +30,7 @@ struct SearchState_pal {
 }
 
 #[cfg(windows)]
+// SAFETY: callback is only invoked by EnumWindows with a valid lparam pointer.
 unsafe extern "system" fn enum_callback(hwnd: HWND, lparam: LPARAM) -> BOOL {
     // SAFETY: lparam is a valid *mut SearchState_pal cast to isize, alive for EnumWindows duration.
     let search_pal = &mut *(lparam.0 as *mut SearchState_pal);

@@ -35,6 +35,7 @@ fn read_title_pal(hwnd: HWND) -> Option<String> {
 }
 
 #[cfg(windows)]
+// SAFETY: callback is only invoked by EnumWindows with a valid lparam pointer.
 unsafe extern "system" fn list_callback(hwnd: HWND, lparam: LPARAM) -> BOOL {
     // SAFETY: lparam is a valid *mut CollectState_pal cast to isize, alive for EnumWindows duration.
     let collect_pal = &mut *(lparam.0 as *mut CollectState_pal);
