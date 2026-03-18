@@ -65,7 +65,7 @@ pub const BURST_MAX_COUNT: usize = 10;
 pub const BURST_CONTENT_PER_FRAME: usize = 2;
 
 /// Total number of MCP tools registered by the server.
-pub const EXPECTED_TOOL_COUNT: usize = 14;
+pub const EXPECTED_TOOL_COUNT: usize = 15;
 
 /// Maximum haystack dimension for NCC search in crop-then-find tests (debug-safe).
 pub const CROP_FIND_MAX_DIM: u32 = 200;

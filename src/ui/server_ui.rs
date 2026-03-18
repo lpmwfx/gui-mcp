@@ -1,6 +1,7 @@
 /// MCP server  --  tool definitions and dispatch.
 use rmcp::{ServerHandler, model::*, tool, Error as McpError};
 use crate::adapter::app_adp;
+use crate::state::help_text;
 use crate::state::sizes::{BURST_DEFAULT_COUNT, BURST_MAX_COUNT, BURST_CONTENT_PER_FRAME};
 
 /// MCP server that exposes GUI vision and control tools to AI assistants.
@@ -187,6 +188,16 @@ impl SlintGuiServer_ui {
             ])),
             Err(e) => Ok(CallToolResult::error(vec![Content::text(e.to_string())])),
         }
+    }
+
+    /// Show help and documentation. Topics: tools, keys, mimic, workflow.
+    #[tool(description = "Show help for gui-mcp tools, key names, and mimic scripting. Topics: tools, keys, mimic, workflow")]
+    async fn help(
+        &self,
+        #[tool(param)] topic: Option<String>,
+    ) -> Result<CallToolResult, McpError> {
+        let text = help_text::help_for_topic(topic.as_deref());
+        Ok(CallToolResult::success(vec![Content::text(text)]))
     }
 
     /// Take a rapid burst of screenshots for near-live GUI monitoring.
