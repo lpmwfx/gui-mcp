@@ -1,0 +1,147 @@
+# INSTALL -- gui-mcp build, install, and update
+
+## Prerequisites
+
+- Windows 10/11 with a live desktop session (not headless)
+- Rust stable toolchain (rustup.rs)
+- Git
+- A live desktop session (required for window capture and input injection)
+
+## First-time install
+
+### 1. Clone and build
+
+```
+git clone https://github.com/lpmwfx/gui-mcp.git
+cd gui-mcp
+cargo build --release
+```
+
+### 2. Install binary
+
+Copy the release binary to a location on your PATH:
+
+```
+cp target/release/slint-gui-mcp.exe ~/bin/gui-mcp.exe
+```
+
+The binary is self-contained -- no runtime dependencies, no DLLs.
+
+### 3. Configure MCP client
+
+#### Claude Code
+
+Add to `~/.claude/settings.json` under `mcpServers`:
+
+```json
+{
+  "mcpServers": {
+    "gui-mcp": {
+      "command": "C:/Users/YOU/bin/gui-mcp.exe",
+      "args": [],
+      "type": "stdio"
+    }
+  }
+}
+```
+
+Replace `YOU` with your Windows username.
+
+#### Codex
+
+Add to your Codex MCP config:
+
+```json
+{
+  "gui-mcp": {
+    "command": "C:/Users/YOU/bin/gui-mcp.exe",
+    "args": []
+  }
+}
+```
+
+### 4. Verify
+
+Start a new Claude Code session and run:
+
+```
+list_windows()
+```
+
+If it returns a list of window titles, the server is working.
+
+## Update
+
+### Quick update (same session)
+
+When you rebuild gui-mcp during development:
+
+```
+cd gui-mcp
+cargo build --release
+taskkill //IM gui-mcp.exe //F
+cp target/release/slint-gui-mcp.exe ~/bin/gui-mcp.exe
+```
+
+Then restart the Claude Code session (or use `/mcp` to reconnect).
+
+The `taskkill` step is required because the running MCP server locks the exe file.
+On Windows, the MCP server process is managed by the MCP client (Claude Code) and
+will be restarted automatically on the next tool call after session restart.
+
+### Pull and update
+
+```
+cd gui-mcp
+git pull
+cargo build --release
+taskkill //IM gui-mcp.exe //F
+cp target/release/slint-gui-mcp.exe ~/bin/gui-mcp.exe
+```
+
+Restart the Claude Code session to pick up the new binary.
+
+### Verify the update
+
+After restarting the session:
+
+```
+help()
+```
+
+The help tool shows the current tool count and available topics.
+Check that the tool count matches what you expect after the update.
+
+## Paths
+
+| What | Path |
+|------|------|
+| Source repo | `D:\REPO\RUSTPROJECTS\MCP\gui-mcp` |
+| Release binary | `target\release\slint-gui-mcp.exe` |
+| Installed binary | `C:\Users\mathi\bin\gui-mcp.exe` |
+| MCP config | `C:\Users\mathi\.claude\settings.json` |
+
+## Troubleshooting
+
+### "cannot create regular file: Device or resource busy"
+
+The MCP server is still running. Kill it first:
+
+```
+taskkill //IM gui-mcp.exe //F
+```
+
+### MCP tools not available after update
+
+Restart the Claude Code session. The MCP server is spawned per-session.
+
+### Tool calls return errors about missing windows
+
+Ensure you have a live desktop session. gui-mcp uses Win32 HWND capture
+which requires a visible desktop -- it cannot work in headless/RDP shadow mode.
+
+### DPI / coordinate mismatch
+
+gui-mcp declares DPI awareness at process startup. If coordinates drift,
+check that the target window is on the primary monitor and that Windows
+display scaling is consistent.
