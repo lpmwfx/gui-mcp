@@ -10,22 +10,24 @@ use crate::state::sizes::KEY_EVENT_DELAY_MS;
 
 #[cfg(windows)]
 use windows::Win32::UI::Input::KeyboardAndMouse::{
-    SendInput, INPUT, INPUT_0, INPUT_KEYBOARD, KEYBDINPUT,
-    KEYEVENTF_KEYUP, KEYEVENTF_UNICODE, KEYBD_EVENT_FLAGS, VIRTUAL_KEY,
+    MapVirtualKeyW, SendInput, INPUT, INPUT_0, INPUT_KEYBOARD, KEYBDINPUT,
+    KEYEVENTF_KEYUP, KEYEVENTF_UNICODE, KEYBD_EVENT_FLAGS, MAP_VIRTUAL_KEY_TYPE, VIRTUAL_KEY,
 };
 
 pub use click_pal::click_at;
 pub use clipboard_pal::{select_all_pal, copy_pal, cut_pal, paste_pal};
 
-/// Builds a single KEYBDINPUT INPUT struct.
+/// Builds a single KEYBDINPUT INPUT struct with hardware scan code.
 #[cfg(windows)]
 fn make_vk_input(vk: u16, flags: KEYBD_EVENT_FLAGS) -> INPUT {
+    // SAFETY: MapVirtualKeyW is always safe to call; returns 0 for unmapped VKs.
+    let scan = unsafe { MapVirtualKeyW(vk as u32, MAP_VIRTUAL_KEY_TYPE(0)) } as u16;
     INPUT {
         r#type: INPUT_KEYBOARD,
         Anonymous: INPUT_0 {
             ki: KEYBDINPUT {
                 wVk: VIRTUAL_KEY(vk),
-                wScan: 0,
+                wScan: scan,
                 dwFlags: flags,
                 time: 0,
                 dwExtraInfo: 0,
