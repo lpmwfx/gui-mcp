@@ -145,8 +145,8 @@ src/
 - `PrintWindow` can fail for GPU-accelerated, minimized, or non-standard windows
 - Partial title matching can hit the wrong window if titles overlap
 - Coordinates may drift on high-DPI or mixed-scaling setups
-- PostMessage input doesn't work with all custom controls or elevated windows
 - NCC template matching is CPU-bound; large screenshots with small templates can be slow
+- **Input tools only work with what the target application implements.** `click_at` requires the app to have a clickable surface (e.g. a `TouchArea` in Slint). `send_keys` requires the app to have keyboard focus handling (e.g. a `FocusScope` in Slint). If the app doesn't handle a particular input event, the tool call will succeed but the app won't react.
 
 ## License
 
