@@ -63,7 +63,23 @@
       "Bash(grep -r SetCursorPos C:/Users/mathi/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/windows-0.58.0/ --include=*.rs -l)",
       "Bash(tasklist)",
       "Bash(taskkill //F //IM slint-ui-test.exe)",
-      "mcp__rulestools__scan_tree"
+      "mcp__rulestools__scan_tree",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:ph3at.github.io)",
+      "WebFetch(domain:www.autohotkey.com)",
+      "WebFetch(domain:hg.openjdk.org)",
+      "WebFetch(domain:deepwiki.com)",
+      "WebFetch(domain:guidedhacking.com)",
+      "WebFetch(domain:cr.openjdk.org)",
+      "WebFetch(domain:docs.rs)",
+      "WebFetch(domain:discourse.glfw.org)",
+      "Bash(cargo new:*)",
+      "Bash(taskkill:*)",
+      "Bash(gh issue:*)",
+      "Bash(gh repo:*)",
+      "Bash(where gui-mcp.exe)",
+      "Bash(cargo run:*)",
+      "mcp__gui-mcp__help"
     ]
   }
 }
