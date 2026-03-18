@@ -49,7 +49,21 @@
       "mcp__gui-mcp__click_at",
       "WebSearch",
       "Bash(cargo doc:*)",
-      "Bash(ls C:/Users/mathi/.cargo/registry/src/*/windows-0.58*)"
+      "Bash(ls C:/Users/mathi/.cargo/registry/src/*/windows-0.58*)",
+      "Bash(taskkill //F //IM gui-mcp.exe)",
+      "Bash(cp D:/REPO/RUSTPROJECTS/MCP/gui-mcp/target/release/slint-gui-mcp.exe C:/Users/mathi/bin/gui-mcp.exe)",
+      "Bash(timeout 5 C:/Users/mathi/bin/gui-mcp.exe)",
+      "Bash(wmic path:*)",
+      "Bash(powershell -c \"\\(Get-ItemProperty ''HKCU:\\\\Control Panel\\\\Desktop\\\\WindowMetrics''\\).AppliedDPI\")",
+      "Bash(powershell -c \"[System.Windows.Forms.Screen]::PrimaryScreen.Bounds\")",
+      "Bash(powershell -File - <<'PS1'\nAdd-Type @\"\nusing System;\nusing System.Runtime.InteropServices;\npublic class CursorHelper {\n    [DllImport\\(\"user32.dll\"\\)]\n    public static extern bool GetCursorPos\\(out POINT p\\);\n    [StructLayout\\(LayoutKind.Sequential\\)]\n    public struct POINT { public int X; public int Y; }\n}\n\"@\n$p = New-Object CursorHelper+POINT\n[CursorHelper]::GetCursorPos\\([ref]$p\\)\nWrite-Host \"Cursor before: $\\($p.X\\), $\\($p.Y\\)\"\nPS1)",
+      "Bash(powershell -Command \"Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.Cursor]::Position\" 2>/dev/null)",
+      "Bash(powershell -Command \"Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.Cursor]::Position\")",
+      "Bash(powershell.exe -NoProfile -Command \"Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.Screen]::AllScreens | ForEach-Object { '{0} Primary={1} X={2} Y={3} W={4} H={5}' -f $_.DeviceName,$_.Primary,$_.Bounds.X,$_.Bounds.Y,$_.Bounds.Width,$_.Bounds.Height }\")",
+      "Bash(grep -r SetCursorPos C:/Users/mathi/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/windows-0.58.0/ --include=*.rs -l)",
+      "Bash(tasklist)",
+      "Bash(taskkill //F //IM slint-ui-test.exe)",
+      "mcp__rulestools__scan_tree"
     ]
   }
 }

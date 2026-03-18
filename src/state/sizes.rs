@@ -34,9 +34,6 @@ pub const PW_FULL_CONTENT: u32 = 2;
 /// Milliseconds to sleep between key-down and key-up messages.
 pub const KEY_EVENT_DELAY_MS: u64 = 10;
 
-/// SendInput absolute coordinate range (0..65535 maps to full screen).
-pub const SENDINPUT_COORD_RANGE: i64 = 65536;
-
 /// Buffer size for GetClassNameW result.
 pub const CLASS_NAME_BUF: usize = 256;
 
