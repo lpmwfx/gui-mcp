@@ -120,6 +120,62 @@ The crop-then-find workflow lets AI assistants build reusable UI element dataset
 
 This enables robust GUI automation that adapts to layout changes.
 
+## Scripting & mimic automation
+
+gui-mcp is an MCP server, but it's also a Rust library. You can use the adapter
+layer directly to script GUI interactions without AI -- turning an AI-discovered
+workflow into a deterministic automation script.
+
+### As a Rust library
+
+Add gui-mcp as a dependency and call the adapter API directly:
+
+```rust
+use slint_gui_mcp::adapter::app_adp;
+
+fn main() {
+    // Screenshot
+    let (b64, w, h, _) = app_adp::screenshot_window("My App").unwrap();
+
+    // Click at coordinates
+    app_adp::click_at_adp("My App", 150, 200, "left").unwrap();
+
+    // Type text
+    app_adp::focused_type_text("My App", "Hello!").unwrap();
+
+    // Send key combo
+    app_adp::focused_send_keys("My App", "ctrl+s").unwrap();
+}
+```
+
+### The mimic workflow
+
+1. **Explore with AI** -- use gui-mcp via Claude Code to interactively figure out
+   coordinates, templates, and the right sequence of clicks/keys
+2. **Capture the steps** -- note the tool calls the AI made (window titles, coords, keys)
+3. **Script it in Rust** -- translate those calls into `app_adp::*` function calls
+4. **Run deterministically** -- `cargo run --bin my_workflow`
+
+This gives you AI-assisted discovery with script-speed replay -- no LLM latency in
+the automation loop.
+
+### Available adapter functions
+
+| Function | Description |
+|----------|-------------|
+| `list_windows()` | List visible window titles as JSON |
+| `get_window_info(title)` | Get rect, dimensions as JSON |
+| `screenshot_window(title)` | Capture as base64 PNG |
+| `screenshot_burst(title, count)` | Multi-frame capture |
+| `find_element(title, template_b64, confidence)` | Template match |
+| `click_at_adp(title, x, y, button)` | Click at coordinates |
+| `click_element(title, template_b64, confidence, button)` | Template click |
+| `focused_type_text(title, text)` | Type text |
+| `focused_send_keys(title, keys)` | Send key combo |
+| `select_all_adp(title)` | Select all |
+| `copy_adp(title)` / `cut_adp(title)` / `paste_adp(title)` | Clipboard ops |
+| `crop_region_adp(title, x, y, w, h)` | Crop region |
+
 ## Architecture
 
 Six-layer hexagonal topology with strict one-way imports:
