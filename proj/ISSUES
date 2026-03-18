@@ -1,4 +1,13 @@
-# 2 issues
+# 11 issues
 
 [KNOWN] \\?\D:\REPO\RUSTPROJECTS\MCP\gui-mcp\src\core\crop_core.rs:15:1: warning rust/modules/no-inline-mod: inline mod `tests` (24 lines) — extract to tests.rs [rust/modules.md]
 [KNOWN] \\?\D:\REPO\RUSTPROJECTS\MCP\gui-mcp\src\core\vision_core.rs:104:1: warning rust/modules/no-inline-mod: inline mod `tests` (62 lines) — extract to tests.rs [rust/modules.md]
+[KNOWN] \\?\D:\REPO\RUSTPROJECTS\MCP\gui-mcp\src\state\help_text.rs:7:1: warning rust/constants/no-magic-number: magic number 15 — use named const or _cfg field [rust/constants.md]
+[KNOWN] \\?\D:\REPO\RUSTPROJECTS\MCP\gui-mcp\src\state\help_text.rs:13:1: warning rust/constants/no-magic-number: magic number 10 — use named const or _cfg field [rust/constants.md]
+[KNOWN] \\?\D:\REPO\RUSTPROJECTS\MCP\gui-mcp\src\state\help_text.rs:58:1: warning rust/constants/no-magic-number: magic number 9 — use named const or _cfg field [rust/constants.md]
+[KNOWN] \\?\D:\REPO\RUSTPROJECTS\MCP\gui-mcp\src\state\help_text.rs:104:1: warning rust/constants/no-magic-number: magic number 150 — use named const or _cfg field [rust/constants.md]
+[KNOWN] \\?\D:\REPO\RUSTPROJECTS\MCP\gui-mcp\src\state\help_text.rs:104:1: warning rust/constants/no-magic-number: magic number 200 — use named const or _cfg field [rust/constants.md]
+[KNOWN] \\?\D:\REPO\RUSTPROJECTS\MCP\gui-mcp\src\state\help_text.rs:118:1: warning rust/constants/no-magic-number: magic number 2 — use named const or _cfg field [rust/constants.md]
+[KNOWN] \\?\D:\REPO\RUSTPROJECTS\MCP\gui-mcp\src\state\help_text.rs:122:1: warning rust/constants/no-magic-number: magic number 3 — use named const or _cfg field [rust/constants.md]
+[KNOWN] \\?\D:\REPO\RUSTPROJECTS\MCP\gui-mcp\src\state\help_text.rs:126:1: warning rust/constants/no-magic-number: magic number 4 — use named const or _cfg field [rust/constants.md]
+[KNOWN] \\?\D:\REPO\RUSTPROJECTS\MCP\gui-mcp\src\ui\server_ui.rs:240:1: warning global/file-limits: file has 206 code lines (soft limit 200) — plan the split now [global/file-limits.md]
