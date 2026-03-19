@@ -207,3 +207,12 @@ src/
 ## License
 
 [EUPL-1.2](LICENSE) -- European Union Public Licence v. 1.2
+
+
+---
+
+<!-- LARS:START -->
+<a href="https://lpmathiasen.com">
+  <img src="https://carousel.lpmathiasen.com/carousel.svg?slot=7" alt="Lars P. Mathiasen"/>
+</a>
+<!-- LARS:END -->
