@@ -33,3 +33,12 @@ This sequence is enforced by the startup checklist in the rules system. Skipping
 - **Tasks have pass criteria.** Every TODO item defines what "done" looks like.
 - **History is preserved.** Completed phases stay documented in PHASES.
 - **Rules are machine-enforced.** Scanners and pre-commit hooks block violations automatically.
+
+
+---
+
+<!-- LARS:START -->
+<a href="https://lpmathiasen.com">
+  <img src="https://carousel.lpmathiasen.com/carousel.svg?slot=7" alt="Lars P. Mathiasen"/>
+</a>
+<!-- LARS:END -->
