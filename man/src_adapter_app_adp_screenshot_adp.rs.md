@@ -8,3 +8,12 @@ Captures a window by partial title and returns the PNG as base64.
 
 ---
 
+
+
+---
+
+<!-- LARS:START -->
+<a href="https://lpmathiasen.com">
+  <img src="https://carousel.lpmathiasen.com/carousel.svg?slot=7" alt="Lars P. Mathiasen"/>
+</a>
+<!-- LARS:END -->
