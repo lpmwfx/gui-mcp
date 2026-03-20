@@ -9,3 +9,12 @@ Returns `None` if the region extends beyond the image bounds.
 
 ---
 
+
+
+---
+
+<!-- LARS:START -->
+<a href="https://lpmathiasen.com">
+  <img src="https://carousel.lpmathiasen.com/carousel.svg?slot=7" alt="Lars P. Mathiasen"/>
+</a>
+<!-- LARS:END -->
