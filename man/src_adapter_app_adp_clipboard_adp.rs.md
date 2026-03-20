@@ -32,3 +32,12 @@ Pastes clipboard content into the named window's edit control.
 
 ---
 
+
+
+---
+
+<!-- LARS:START -->
+<a href="https://lpmathiasen.com">
+  <img src="https://carousel.lpmathiasen.com/carousel.svg?slot=7" alt="Lars P. Mathiasen"/>
+</a>
+<!-- LARS:END -->
