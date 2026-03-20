@@ -25,3 +25,12 @@ Sends a key combination to `hwnd` via WM_KEYDOWN/WM_KEYUP. No foreground require
 
 ---
 
+
+
+---
+
+<!-- LARS:START -->
+<a href="https://lpmathiasen.com">
+  <img src="https://carousel.lpmathiasen.com/carousel.svg?slot=7" alt="Lars P. Mathiasen"/>
+</a>
+<!-- LARS:END -->
